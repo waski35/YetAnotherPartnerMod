@@ -279,6 +279,9 @@ namespace YetAnotherPartnerMod
                             if (!partner_Ped.IsDead)
                             {
                                 partner_Ped.Tasks.Clear();
+                                                       
+
+
                                 Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(3);
                                 foreach (Ped attacked_ped in attacked_peds)
                                 {
@@ -419,12 +422,12 @@ namespace YetAnotherPartnerMod
                 
                 if (option_dev_mode == 35)
                 {
-                    /*
+                    
                     if (Game.IsKeyDown(Keys.PageUp))
                     {
-                        Game.LocalPlayer.Character.SetPositionWithSnap(new Vector3(431f, -982f, 30f));
+                        World.TeleportLocalPlayer(new Vector3(431f, -982f, 30f),false);
                     }
-                      */
+                    
                 }
 
                 GameFiber.Yield();
