@@ -232,6 +232,7 @@ namespace YetAnotherPartnerMod
                                             partner_Ped.MakePersistent();
                                             partner_Ped.StaysInGroups = true;
                                             partner_Ped.KeepTasks = false;
+                                            partners.DissolveDistance = 10000f;
 
                                             current_partner_task = 5;
                                             Game.LogTrivial(plug_ver + " : partner selected");
