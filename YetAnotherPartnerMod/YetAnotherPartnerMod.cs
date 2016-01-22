@@ -216,7 +216,7 @@ namespace YetAnotherPartnerMod
                                     String pos_cop_mod = possibly_partner.Model.Name;
                                     Game.LogTrivial(plug_ver + " : cop model : " + pos_cop_mod + "is selected");
                                     
-                                    if (cop_models.Contains(pos_cop_mod))
+                                    if (cop_models.Contains(pos_cop_mod.ToLower()))
                                     {
                                         Game.LogTrivial(plug_ver + " : possibly partner is cop");
                                         partner_Ped = possibly_partner;
