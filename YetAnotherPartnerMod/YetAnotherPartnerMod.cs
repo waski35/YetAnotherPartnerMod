@@ -240,7 +240,7 @@ namespace YetAnotherPartnerMod
 
                                             current_partner_task = 5;
                                             Game.LogTrivial(plug_ver + " : partner selected");
-                                            Game.DisplayHelp("When Your partner dies or despawns, You can allways get new one.", false);
+                                            Game.DisplayHelp("When Your partner dies or despawns, You can allways get a new one.", false);
                                         }
                                     }
                                 }
