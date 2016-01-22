@@ -341,34 +341,37 @@ namespace YetAnotherPartnerMod
                         }
                         if (current_partner_task == 1)
                         {
-                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f)
+                            if (partner_Ped.IsValid())
                             {
-                                partner_Ped.Tasks.Pause(500);
-                                //partner_Ped.Tasks.StandStill(2000);
-                            }
-                            else if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) >= 2f)
-                            {
-                                //partner_Ped.Tasks.Clear();
-                                partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 1f, 0f));
-                            }
-                            else if (Game.LocalPlayer.Character.IsInAnyVehicle(false))
-                            {
-                                if (!partner_Ped.IsInAnyVehicle(true))
+                                if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f)
                                 {
-                                    partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle,0);
-
+                                    partner_Ped.Tasks.Pause(500);
+                                    //partner_Ped.Tasks.StandStill(2000);
                                 }
-                            }
-                            else if (Game.LocalPlayer.Character.IsShooting)
-                            {
-                                if (partner_Ped.IsValid())
+                                else if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) >= 2f)
                                 {
-                                    if (!partner_Ped.IsDead)
+                                    //partner_Ped.Tasks.Clear();
+                                    partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 1f, 0f));
+                                }
+                                else if (Game.LocalPlayer.Character.IsInAnyVehicle(false))
+                                {
+                                    if (!partner_Ped.IsInAnyVehicle(true))
                                     {
-                                        partner_Ped.Tasks.Clear();
-                                        partner_Ped.Tasks.FightAgainstClosestHatedTarget(90f);
-                                        current_partner_task = 2;
-                                        Game.LogTrivial(plug_ver + " : partner is attacking ");
+                                        partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle, 0);
+
+                                    }
+                                }
+                                else if (Game.LocalPlayer.Character.IsShooting)
+                                {
+                                    if (partner_Ped.IsValid())
+                                    {
+                                        if (!partner_Ped.IsDead)
+                                        {
+                                            partner_Ped.Tasks.Clear();
+                                            partner_Ped.Tasks.FightAgainstClosestHatedTarget(90f);
+                                            current_partner_task = 2;
+                                            Game.LogTrivial(plug_ver + " : partner is attacking ");
+                                        }
                                     }
                                 }
                             }
