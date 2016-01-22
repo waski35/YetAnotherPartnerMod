@@ -101,6 +101,8 @@ namespace YetAnotherPartnerMod
                     on_duty = true;
 
                     Game.DisplayNotification("~b~Yet Another Partner Mod~w~ " + typeof(YetAnotherPartnerModClass).Assembly.GetName().Version.ToString() + "~g~ loaded !");
+                    Game.DisplayHelp("To get partner, come close to one of policemen and press ~b" + option_key_partner_select + " ~w.",8000);
+                    
                 }
             }
             static void ReadSettings()
@@ -201,6 +203,7 @@ namespace YetAnotherPartnerMod
             {
                 if (on_duty)
                 {
+                    
                     if (Game.IsKeyDown(key_select))
                     {
                         // select partner
@@ -237,6 +240,7 @@ namespace YetAnotherPartnerMod
 
                                             current_partner_task = 5;
                                             Game.LogTrivial(plug_ver + " : partner selected");
+                                            Game.DisplayHelp("When Your partner dies or despawns, You can allways get new one.", false);
                                         }
                                     }
                                 }
@@ -256,6 +260,7 @@ namespace YetAnotherPartnerMod
                                 //partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
                                 current_partner_task = 1;
                                 Game.LogTrivial(plug_ver + " : partner is following ");
+                                Game.DisplayHelp("Partner is following You", false);
                             }
                         }
                         
@@ -277,6 +282,7 @@ namespace YetAnotherPartnerMod
                                 partner_Ped.Tasks.FightAgainstClosestHatedTarget(90f);
                                 current_partner_task = 2;
                                 Game.LogTrivial(plug_ver + " : partner is attacking ");
+                                Game.DisplayHelp("Partner is attacking nearest enemy", false);
                             }
                         }
                     }
@@ -291,6 +297,7 @@ namespace YetAnotherPartnerMod
                                 //partner_Ped.Tasks.StandStill(5000);
                                 current_partner_task = 4;
                                 Game.LogTrivial(plug_ver + " : partner stoppped ");
+                                Game.DisplayHelp("Partner halted", false);
                             }
                         }
                     }
@@ -321,6 +328,7 @@ namespace YetAnotherPartnerMod
                                 partner_Ped.Tasks.DriveToPosition(Game.LocalPlayer.Character.Position, 35f, VehicleDrivingFlags.Normal);
                                 player_died = true;
                                 Game.LogTrivial(plug_ver + " : partner travels to player");
+
                             }
                         }
                         if (Game.LocalPlayer.Character.IsAlive)
@@ -329,6 +337,7 @@ namespace YetAnotherPartnerMod
                             {
                                 if (player_died)
                                 {
+                                    Game.DisplayHelp("Partner is coming to Your location, wait until he arrives with Your car.", 10000);
                                     if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 30)
                                     {
 
@@ -378,6 +387,10 @@ namespace YetAnotherPartnerMod
                                 }
                             }
                         }
+                    }
+                    if (!partner_Ped.Exists())
+                    {
+                        current_partner_task = 0;
                     }
                     
                 }
