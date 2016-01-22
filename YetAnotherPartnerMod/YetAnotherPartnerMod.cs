@@ -286,7 +286,7 @@ namespace YetAnotherPartnerMod
                             if (!partner_Ped.IsDead)
                             {
                                 partner_Ped.Tasks.Clear();
-                                partner_Ped.Tasks.StandStill(5000);
+                                //partner_Ped.Tasks.StandStill(5000);
                                 current_partner_task = 4;
                                 Game.LogTrivial(plug_ver + " : partner stoppped ");
                             }
@@ -343,7 +343,7 @@ namespace YetAnotherPartnerMod
                             if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 5f)
                             {
                                 partner_Ped.Tasks.Clear();
-                                partner_Ped.Tasks.StandStill(2000);
+                                //partner_Ped.Tasks.StandStill(2000);
                             }
                             if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) > 15f)
                             {
