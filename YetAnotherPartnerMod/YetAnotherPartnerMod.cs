@@ -346,7 +346,7 @@ namespace YetAnotherPartnerMod
                             {
                                 if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f)
                                 {
-                                    partner_Ped.Tasks.Pause(500);
+                                    partner_Ped.Tasks.Pause(100);
                                     //partner_Ped.Tasks.StandStill(2000);
                                 }
                                 else if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) >= 2f)
