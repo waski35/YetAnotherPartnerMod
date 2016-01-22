@@ -342,13 +342,13 @@ namespace YetAnotherPartnerMod
                         {
                             if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f)
                             {
-                                partner_Ped.Tasks.Clear();
+                                partner_Ped.Tasks.Pause(500);
                                 //partner_Ped.Tasks.StandStill(2000);
                             }
                             if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) > 5f)
                             {
                                 //partner_Ped.Tasks.Clear();
-                                partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(3f, 3f, 3f));
+                                //partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(3f, 3f, 3f));
                             }
                         }
                     }
