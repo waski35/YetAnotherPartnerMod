@@ -233,6 +233,7 @@ namespace YetAnotherPartnerMod
                                             partner_Ped.StaysInGroups = true;
                                             partner_Ped.KeepTasks = false;
                                             partners.DissolveDistance = 10000f;
+                                            partner_Ped.VisionRange = 500f;
 
                                             current_partner_task = 5;
                                             Game.LogTrivial(plug_ver + " : partner selected");
@@ -340,15 +341,36 @@ namespace YetAnotherPartnerMod
                         }
                         if (current_partner_task == 1)
                         {
-                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 3f)
+                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f)
                             {
                                 partner_Ped.Tasks.Pause(500);
                                 //partner_Ped.Tasks.StandStill(2000);
                             }
-                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) >= 3f)
+                            else if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) >= 2f)
                             {
                                 //partner_Ped.Tasks.Clear();
-                                partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 1f, 1f));
+                                partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 1f, 0f));
+                            }
+                            else if (Game.LocalPlayer.Character.IsInAnyVehicle(false))
+                            {
+                                if (!partner_Ped.IsInAnyVehicle(true))
+                                {
+                                    partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle,0);
+
+                                }
+                            }
+                            else if (Game.LocalPlayer.Character.IsShooting)
+                            {
+                                if (partner_Ped.IsValid())
+                                {
+                                    if (!partner_Ped.IsDead)
+                                    {
+                                        partner_Ped.Tasks.Clear();
+                                        partner_Ped.Tasks.FightAgainstClosestHatedTarget(90f);
+                                        current_partner_task = 2;
+                                        Game.LogTrivial(plug_ver + " : partner is attacking ");
+                                    }
+                                }
                             }
                         }
                     }
@@ -357,10 +379,12 @@ namespace YetAnotherPartnerMod
                 
                 if (option_dev_mode == 35)
                 {
+                    /*
                     if (Game.IsKeyDown(Keys.PageUp))
                     {
                         Game.LocalPlayer.Character.SetPositionWithSnap(new Vector3(431f, -982f, 30f));
                     }
+                      */
                 }
 
                 GameFiber.Yield();
