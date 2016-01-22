@@ -264,7 +264,7 @@ namespace YetAnotherPartnerMod
                         
                         
                     }
-                    else if (Game.IsKeyDown(key_attack) || (current_partner_task !=0 ))
+                    else if (Game.IsKeyDown(key_attack) && (current_partner_task !=0 ))
                     {
                         // partner attack
                         if (partner_Ped.IsValid())
@@ -274,11 +274,11 @@ namespace YetAnotherPartnerMod
                                 partner_Ped.Tasks.Clear();
                                 partner_Ped.Tasks.FightAgainstClosestHatedTarget(90f);
                                 current_partner_task = 2;
-                                Game.LogTrivial(plug_ver + " : partnrt is atacking ");
+                                Game.LogTrivial(plug_ver + " : partner is attacking ");
                             }
                         }
                     }
-                    else if (Game.IsKeyDown(key_stop) || (current_partner_task != 0))
+                    else if (Game.IsKeyDown(key_stop) && (current_partner_task != 0))
                     {
                         // partner stop
                         if (partner_Ped.IsValid())
@@ -288,7 +288,7 @@ namespace YetAnotherPartnerMod
                                 partner_Ped.Tasks.Clear();
                                 partner_Ped.Tasks.StandStill(5000);
                                 current_partner_task = 4;
-                                Game.LogTrivial(plug_ver + " : partne stoppped ");
+                                Game.LogTrivial(plug_ver + " : partner stoppped ");
                             }
                         }
                     }
