@@ -202,11 +202,14 @@ namespace YetAnotherPartnerMod
                             Ped possibly_partner = Game.LocalPlayer.Character.GetNearbyPeds(1)[0];
                             if (possibly_partner.IsValid())
                             {
+                                Game.LogTrivial(plug_ver + " : possibly partner is valid");
                                 if (possibly_partner.IsHuman && possibly_partner.IsAlive)
                                 {
+                                    Game.LogTrivial(plug_ver + " : possibly partner is alive and is human");
                                     Persona possibly_cop_persona = Functions.GetPersonaForPed(possibly_partner);
                                     if (possibly_cop_persona.IsCop)
                                     {
+                                        Game.LogTrivial(plug_ver + " : possibly partner is cop");
                                         partner_Ped = possibly_partner;
                                         partners.AddMember(Game.LocalPlayer.Character);
                                         if (partner_Ped.IsValid())
@@ -221,6 +224,7 @@ namespace YetAnotherPartnerMod
                                             partner_Ped.KeepTasks = false;
 
                                             current_partner_task = 5;
+                                            Game.LogTrivial(plug_ver + " : partner selected");
                                         }
                                     }
                                 }
@@ -237,6 +241,7 @@ namespace YetAnotherPartnerMod
                             {
                                 partner_Ped.Tasks.GoStraightToPosition(Game.LocalPlayer.Character.Position, 7f, 0f, 150f, 0);
                                 current_partner_task = 1;
+                                Game.LogTrivial(plug_ver + " : partner is following ");
                             }
                         }
                         
@@ -256,6 +261,7 @@ namespace YetAnotherPartnerMod
                             {
                                 partner_Ped.Tasks.FightAgainstClosestHatedTarget(90f);
                                 current_partner_task = 2;
+                                Game.LogTrivial(plug_ver + " : partnrt is atacking ");
                             }
                         }
                     }
@@ -268,6 +274,7 @@ namespace YetAnotherPartnerMod
                             {
                                 partner_Ped.Tasks.StandStill(5000);
                                 current_partner_task = 4;
+                                Game.LogTrivial(plug_ver + " : partne stoppped ");
                             }
                         }
                     }
@@ -282,6 +289,7 @@ namespace YetAnotherPartnerMod
                             if (partner_Ped.IsDead)
                             {
                                 current_partner_task = 0;
+                                Game.LogTrivial(plug_ver + " : partner is dead ");
                             }
                         }
                         if (Game.LocalPlayer.Character.IsDead)
@@ -295,6 +303,7 @@ namespace YetAnotherPartnerMod
                                 partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.LastVehicle, -1);
                                 partner_Ped.Tasks.DriveToPosition(Game.LocalPlayer.Character.Position, 35f, VehicleDrivingFlags.Normal);
                                 player_died = true;
+                                Game.LogTrivial(plug_ver + " : partner travels to player");
                             }
                         }
                         if (Game.LocalPlayer.Character.IsAlive)
@@ -308,6 +317,7 @@ namespace YetAnotherPartnerMod
                                         partner_Ped.Tasks.LeaveVehicle(LeaveVehicleFlags.LeaveDoorOpen);
                                         current_partner_task = 1;
                                         player_died = false;
+                                        Game.LogTrivial(plug_ver + " : partner traveled to player ");
                                     }
                                 }
                             }
