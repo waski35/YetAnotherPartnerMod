@@ -270,6 +270,7 @@ namespace YetAnotherPartnerMod
                         {
                             if (!partner_Ped.IsDead)
                             {
+                                partner_Ped.Tasks.ClearImmediately();
                                 partner_Ped.Tasks.FightAgainstClosestHatedTarget(90f);
                                 current_partner_task = 2;
                                 Game.LogTrivial(plug_ver + " : partnrt is atacking ");
@@ -283,6 +284,7 @@ namespace YetAnotherPartnerMod
                         {
                             if (!partner_Ped.IsDead)
                             {
+                                partner_Ped.Tasks.ClearImmediately();
                                 partner_Ped.Tasks.StandStill(5000);
                                 current_partner_task = 4;
                                 Game.LogTrivial(plug_ver + " : partne stoppped ");
@@ -311,6 +313,7 @@ namespace YetAnotherPartnerMod
                                 {
                                     partner_Ped.Resurrect();
                                 }
+                                partner_Ped.Tasks.ClearImmediately();
                                 partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.LastVehicle, -1);
                                 partner_Ped.Tasks.DriveToPosition(Game.LocalPlayer.Character.Position, 35f, VehicleDrivingFlags.Normal);
                                 player_died = true;
@@ -325,6 +328,7 @@ namespace YetAnotherPartnerMod
                                 {
                                     if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 30)
                                     {
+
                                         partner_Ped.Tasks.LeaveVehicle(LeaveVehicleFlags.LeaveDoorOpen);
                                         current_partner_task = 1;
                                         player_died = false;
