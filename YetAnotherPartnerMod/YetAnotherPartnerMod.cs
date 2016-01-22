@@ -220,7 +220,7 @@ namespace YetAnotherPartnerMod
                                     {
                                         Game.LogTrivial(plug_ver + " : possibly partner is cop");
                                         partner_Ped = possibly_partner;
-                                        partners.AddMember(Game.LocalPlayer.Character);
+                                        partners = new Group(Game.LocalPlayer.Character);
                                         if (partner_Ped.IsValid())
                                         {
                                             partners.AddMember(partner_Ped);
