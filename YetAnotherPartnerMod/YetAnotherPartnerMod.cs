@@ -249,7 +249,7 @@ namespace YetAnotherPartnerMod
                         {
                             if (!partner_Ped.IsDead)
                             {
-                                partner_Ped.Tasks.ClearImmediately();
+                                partner_Ped.Tasks.Clear();
                                 partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character,new Vector3(3f,3f,3f));
                                 //partner_Ped.Tasks.GoStraightToPosition(Game.LocalPlayer.Character.Position, 7f, 0f, 150f, 0);
                                 current_partner_task = 1;
@@ -271,7 +271,7 @@ namespace YetAnotherPartnerMod
                         {
                             if (!partner_Ped.IsDead)
                             {
-                                partner_Ped.Tasks.ClearImmediately();
+                                partner_Ped.Tasks.Clear();
                                 partner_Ped.Tasks.FightAgainstClosestHatedTarget(90f);
                                 current_partner_task = 2;
                                 Game.LogTrivial(plug_ver + " : partnrt is atacking ");
@@ -285,7 +285,7 @@ namespace YetAnotherPartnerMod
                         {
                             if (!partner_Ped.IsDead)
                             {
-                                partner_Ped.Tasks.ClearImmediately();
+                                partner_Ped.Tasks.Clear();
                                 partner_Ped.Tasks.StandStill(5000);
                                 current_partner_task = 4;
                                 Game.LogTrivial(plug_ver + " : partne stoppped ");
@@ -314,7 +314,7 @@ namespace YetAnotherPartnerMod
                                 {
                                     partner_Ped.Resurrect();
                                 }
-                                partner_Ped.Tasks.ClearImmediately();
+                                partner_Ped.Tasks.Clear();
                                 partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.LastVehicle, -1);
                                 partner_Ped.Tasks.DriveToPosition(Game.LocalPlayer.Character.Position, 35f, VehicleDrivingFlags.Normal);
                                 player_died = true;
