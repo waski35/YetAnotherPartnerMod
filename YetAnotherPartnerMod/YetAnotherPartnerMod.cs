@@ -33,6 +33,7 @@ namespace YetAnotherPartnerMod
         public static Keys key_attack;
         public static Keys key_stop;
         public static Keys key_follow;
+        public static List<String> cop_models;
 
         public static bool player_died = false;
         public static int current_partner_task = 0; //0-not exists, 1- follow, 2-attack, 3-arrest, 4-stop, 5-selected
@@ -78,6 +79,11 @@ namespace YetAnotherPartnerMod
                 Functions.OnOnDutyStateChanged += Functions_OnOnDutyStateChanged;
 
                 Game.LogTrivial("Yet Another Partner Mod " + typeof(YetAnotherPartnerModClass).Assembly.GetName().Version.ToString() + " loaded!");
+                cop_models.Add("csb_cop");
+                cop_models.Add("s_f_y_cop_01");
+                cop_models.Add("s_m_m_snowcop_01");
+                cop_models.Add("s_m_y_cop_01");
+                cop_models.Add("s_m_y_hwaycop_01");
 
                 ReadSettings();
             }
@@ -206,8 +212,10 @@ namespace YetAnotherPartnerMod
                                 if (possibly_partner.IsHuman && possibly_partner.IsAlive)
                                 {
                                     Game.LogTrivial(plug_ver + " : possibly partner is alive and is human");
-                                    Persona possibly_cop_persona = Functions.GetPersonaForPed(possibly_partner);
-                                    if (possibly_cop_persona.IsCop)
+                                    String pos_cop_mod = possibly_partner.Model.Name;
+                                    Game.LogTrivial(plug_ver + " : cop model : " + pos_cop_mod + "is selected");
+                                    
+                                    if (cop_models.Contains(pos_cop_mod))
                                     {
                                         Game.LogTrivial(plug_ver + " : possibly partner is cop");
                                         partner_Ped = possibly_partner;
