@@ -251,18 +251,7 @@ namespace YetAnotherPartnerMod
                     else if (Game.IsKeyDown(key_follow) || (current_partner_task != 0 && (current_partner_task == 5)))
                     {
                         // partner follow me
-                        if (partner_Ped.IsValid())
-                        {
-                            if (!partner_Ped.IsDead)
-                            {
-                                partner_Ped.Tasks.Clear();
-                                partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character,new Vector3(1f,0f,0f));
-                                //partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
-                                current_partner_task = 1;
-                                Game.LogTrivial(plug_ver + " : partner is following ");
-                                Game.DisplayHelp("Partner is following You", false);
-                            }
-                        }
+                        Partner_follow_command();
                         
                     }
                     else if (Game.IsKeyDown(key_arrest))
@@ -274,45 +263,13 @@ namespace YetAnotherPartnerMod
                     else if (Game.IsKeyDown(key_attack) && (current_partner_task !=0 ))
                     {
                         // partner attack
-                        if (partner_Ped.IsValid())
-                        {
-                            if (!partner_Ped.IsDead)
-                            {
-                                partner_Ped.Tasks.Clear();
-                                                       
-
-
-                                Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(3);
-                                foreach (Ped attacked_ped in attacked_peds)
-                                {
-                                    if (attacked_ped != partner_Ped && !attacked_ped.IsPlayer)
-                                    {
-                                        if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
-                                        {
-                                            partner_Ped.Tasks.FightAgainst(attacked_ped);
-                                            current_partner_task = 2;
-                                            Game.LogTrivial(plug_ver + " : partner is attacking ");
-                                        }
-                                    }
-                                }
-                                Game.DisplayHelp("Partner is attacking nearest enemy", false);
-                            }
-                        }
+                        Partner_attack_command();
+                        Game.DisplayHelp("Partner is attacking nearby enemies.");
                     }
                     else if (Game.IsKeyDown(key_stop) && (current_partner_task != 0))
                     {
                         // partner stop
-                        if (partner_Ped.IsValid())
-                        {
-                            if (!partner_Ped.IsDead)
-                            {
-                                partner_Ped.Tasks.Clear();
-                                //partner_Ped.Tasks.StandStill(5000);
-                                current_partner_task = 4;
-                                Game.LogTrivial(plug_ver + " : partner stoppped ");
-                                Game.DisplayHelp("Partner halted", false);
-                            }
-                        }
+                        Partner_stop_command();
                     }
                     else
                     {
@@ -364,55 +321,8 @@ namespace YetAnotherPartnerMod
                         }
                         if (current_partner_task == 1)
                         {
-                            if (partner_Ped.IsValid())
-                            {
-                                if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f)
-                                {
-                                    partner_Ped.Tasks.Pause(100);
-                                    //partner_Ped.Tasks.StandStill(2000);
-                                }
-                                else if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) >= 2f)
-                                {
-                                    //partner_Ped.Tasks.Clear();
-                                    partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 0f, 0f));
-                                    //partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
-                                }
-                                else if (Game.LocalPlayer.Character.IsInAnyVehicle(false))
-                                {
-                                    if (!partner_Ped.IsInAnyVehicle(true))
-                                    {
-                                        partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle, 0);
-
-                                    }
-                                }
-                                else if (Game.LocalPlayer.Character.IsShooting)
-                                {
-                                    if (partner_Ped.IsValid())
-                                    {
-                                        if (!partner_Ped.IsDead)
-                                        {
-                                            partner_Ped.Tasks.Clear();
-                                            Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(3);
-                                            foreach (Ped attacked_ped in attacked_peds)
-                                            {
-                                                if (attacked_ped != partner_Ped && !attacked_ped.IsPlayer)
-                                                {
-                                                    if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
-                                                    {
-                                                        partner_Ped.Tasks.FightAgainst(attacked_ped);
-                                                        current_partner_task = 2;
-                                                        Game.LogTrivial(plug_ver + " : partner is attacking ");
-                                                    }
-                                                }
-                                            }
-                                            
-                                            
-                                        }
-                                    }
-                                }
-                            }
+                            Partner_ambient();
                         }
-                    }
                     if (!partner_Ped.Exists())
                     {
                         current_partner_task = 0;
@@ -430,11 +340,104 @@ namespace YetAnotherPartnerMod
                     
                 }
 
+                
+
+            } // on duty
                 GameFiber.Yield();
+            } // petla
 
+        } // watek
+
+        public static void Partner_attack_command()
+        {
+            if (partner_Ped.IsValid())
+            {
+                if (!partner_Ped.IsDead)
+                {
+                    partner_Ped.Tasks.Clear();
+                    Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(3);
+                    foreach (Ped attacked_ped in attacked_peds)
+                    {
+                        if (attacked_ped.IsValid())
+                        {
+                            if (attacked_ped != partner_Ped && !attacked_ped.IsPlayer)
+                            {
+                                if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
+                                {
+                                    partner_Ped.Tasks.FightAgainst(attacked_ped);
+                                    current_partner_task = 2;
+                                    Game.LogTrivial(plug_ver + " : partner is attacking ");
+                                }
+                            }
+                        }
+                    }
+
+
+                }
             }
-
         }
 
-    }
-}
+        public static void Partner_ambient()
+        {
+            if (partner_Ped.IsValid())
+            {
+                if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f)
+                {
+                    partner_Ped.Tasks.Pause(100);
+                    //partner_Ped.Tasks.StandStill(2000);
+                }
+                else if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) >= 2f)
+                {
+                    //partner_Ped.Tasks.Clear();
+                    partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 0f, 0f));
+                    //partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
+                }
+                else if (Game.LocalPlayer.Character.IsInAnyVehicle(false))
+                {
+                    if (!partner_Ped.IsInAnyVehicle(true))
+                    {
+                        partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle, 0);
+
+                    }
+                }
+                else if (Game.LocalPlayer.Character.IsShooting)
+                {
+                    Partner_attack_command();
+                }
+            }
+        }
+        
+        public static void Partner_follow_command()
+        {
+            if (partner_Ped.IsValid())
+            {
+                if (!partner_Ped.IsDead)
+                {
+                    partner_Ped.Tasks.Clear();
+                    partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character,new Vector3(1f,0f,0f));
+                    //partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
+                    current_partner_task = 1;
+                    Game.LogTrivial(plug_ver + " : partner is following ");
+                    Game.DisplayHelp("Partner is following You", false);
+                }
+            }
+        }
+        public static void Partner_stop_command()
+        {
+            if (partner_Ped.IsValid())
+            {
+                if (!partner_Ped.IsDead)
+                {
+                    partner_Ped.Tasks.Clear();
+                    //partner_Ped.Tasks.StandStill(5000);
+                    current_partner_task = 4;
+                    Game.LogTrivial(plug_ver + " : partner stoppped ");
+                    Game.DisplayHelp("Partner halted", false);
+                }
+            }
+        }
+    
+
+    } // klasa
+} // namespace
+
