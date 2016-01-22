@@ -251,7 +251,7 @@ namespace YetAnotherPartnerMod
                             if (!partner_Ped.IsDead)
                             {
                                 partner_Ped.Tasks.Clear();
-                                partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character,new Vector3(2f,2f,1f));
+                                partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character,new Vector3(1f,1f,1f));
                                 current_partner_task = 1;
                                 Game.LogTrivial(plug_ver + " : partner is following ");
                             }
@@ -340,15 +340,15 @@ namespace YetAnotherPartnerMod
                         }
                         if (current_partner_task == 1)
                         {
-                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f)
+                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 3f)
                             {
                                 partner_Ped.Tasks.Pause(500);
                                 //partner_Ped.Tasks.StandStill(2000);
                             }
-                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) > 5f)
+                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) >= 3f)
                             {
                                 //partner_Ped.Tasks.Clear();
-                                //partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(3f, 3f, 3f));
+                                partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 1f, 1f));
                             }
                         }
                     }
