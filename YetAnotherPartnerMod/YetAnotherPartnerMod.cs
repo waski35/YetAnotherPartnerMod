@@ -55,8 +55,8 @@ namespace YetAnotherPartnerMod
                 {
                     Game.LogTrivial(plug_ver + " : Developer mode activated !");
                 }
-                ThreadStart dev_thread = new ThreadStart(YetAnotherPartnerModClass.DevThread);
-                dthread = new GameFiber(YetAnotherPartnerModClass.DevThread, "awc_dev_checks_thread");
+                ThreadStart dev_thread = new ThreadStart(YetAnotherPartnerModClass.PartnerThread);
+                dthread = new GameFiber(YetAnotherPartnerModClass.PartnerThread, "yapm_dev_checks_thread");
                 dthread.Start();
 
             }
@@ -188,7 +188,7 @@ namespace YetAnotherPartnerMod
 
             }
         }
-        public static void DevThread()
+        public static void PartnerThread()
         {
             while (true)
             {
