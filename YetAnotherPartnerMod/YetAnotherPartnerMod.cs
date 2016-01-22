@@ -235,7 +235,7 @@ namespace YetAnotherPartnerMod
                                             partner_Ped.MakePersistent();
                                             partner_Ped.StaysInGroups = true;
                                             partner_Ped.KeepTasks = true;
-                                            partners.DissolveDistance = 10000f;
+                                            partners.DissolveDistance = 30000f;
                                             partner_Ped.VisionRange = 500f;
 
                                             current_partner_task = 5;
@@ -279,9 +279,19 @@ namespace YetAnotherPartnerMod
                             if (!partner_Ped.IsDead)
                             {
                                 partner_Ped.Tasks.Clear();
-                                partner_Ped.Tasks.FightAgainstClosestHatedTarget(90f);
-                                current_partner_task = 2;
-                                Game.LogTrivial(plug_ver + " : partner is attacking ");
+                                Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(3);
+                                foreach (Ped attacked_ped in attacked_peds)
+                                {
+                                    if (attacked_ped != partner_Ped && !attacked_ped.IsPlayer)
+                                    {
+                                        if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
+                                        {
+                                            partner_Ped.Tasks.FightAgainst(attacked_ped);
+                                            current_partner_task = 2;
+                                            Game.LogTrivial(plug_ver + " : partner is attacking ");
+                                        }
+                                    }
+                                }
                                 Game.DisplayHelp("Partner is attacking nearest enemy", false);
                             }
                         }
@@ -379,9 +389,21 @@ namespace YetAnotherPartnerMod
                                         if (!partner_Ped.IsDead)
                                         {
                                             partner_Ped.Tasks.Clear();
-                                            partner_Ped.Tasks.FightAgainstClosestHatedTarget(90f);
-                                            current_partner_task = 2;
-                                            Game.LogTrivial(plug_ver + " : partner is attacking ");
+                                            Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(3);
+                                            foreach (Ped attacked_ped in attacked_peds)
+                                            {
+                                                if (attacked_ped != partner_Ped && !attacked_ped.IsPlayer)
+                                                {
+                                                    if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
+                                                    {
+                                                        partner_Ped.Tasks.FightAgainst(attacked_ped);
+                                                        current_partner_task = 2;
+                                                        Game.LogTrivial(plug_ver + " : partner is attacking ");
+                                                    }
+                                                }
+                                            }
+                                            
+                                            
                                         }
                                     }
                                 }
