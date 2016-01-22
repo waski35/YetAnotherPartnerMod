@@ -251,7 +251,7 @@ namespace YetAnotherPartnerMod
                             if (!partner_Ped.IsDead)
                             {
                                 partner_Ped.Tasks.Clear();
-                                partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character,new Vector3(3f,3f,3f));
+                                partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character,new Vector3(2f,2f,1f));
                                 current_partner_task = 1;
                                 Game.LogTrivial(plug_ver + " : partner is following ");
                             }
