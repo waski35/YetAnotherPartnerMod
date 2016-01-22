@@ -275,37 +275,40 @@ namespace YetAnotherPartnerMod
                     {
                         //do nothing
                     }
-                    if (partner_Ped.IsValid())
-                    {
-                        if (partner_Ped.IsDead)
-                        {
-                            current_partner_task = 0;
-                        }
-                    }
-                    if (Game.LocalPlayer.Character.IsDead)
+                    if (current_partner_task > 0)
                     {
                         if (partner_Ped.IsValid())
                         {
                             if (partner_Ped.IsDead)
                             {
-                                partner_Ped.Resurrect();
+                                current_partner_task = 0;
                             }
-                            partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.LastVehicle, -1);
-                            partner_Ped.Tasks.DriveToPosition(Game.LocalPlayer.Character.Position, 35f, VehicleDrivingFlags.Normal);
-                            player_died = true;
                         }
-                    }
-                    if (Game.LocalPlayer.Character.IsAlive)
-                    {
-                        if (partner_Ped.IsValid())
+                        if (Game.LocalPlayer.Character.IsDead)
                         {
-                            if (player_died)
+                            if (partner_Ped.IsValid())
                             {
-                                if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 30)
+                                if (partner_Ped.IsDead)
                                 {
-                                    partner_Ped.Tasks.LeaveVehicle(LeaveVehicleFlags.LeaveDoorOpen);
-                                    current_partner_task = 1;
-                                    player_died = false;
+                                    partner_Ped.Resurrect();
+                                }
+                                partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.LastVehicle, -1);
+                                partner_Ped.Tasks.DriveToPosition(Game.LocalPlayer.Character.Position, 35f, VehicleDrivingFlags.Normal);
+                                player_died = true;
+                            }
+                        }
+                        if (Game.LocalPlayer.Character.IsAlive)
+                        {
+                            if (partner_Ped.IsValid())
+                            {
+                                if (player_died)
+                                {
+                                    if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 30)
+                                    {
+                                        partner_Ped.Tasks.LeaveVehicle(LeaveVehicleFlags.LeaveDoorOpen);
+                                        current_partner_task = 1;
+                                        player_died = false;
+                                    }
                                 }
                             }
                         }
