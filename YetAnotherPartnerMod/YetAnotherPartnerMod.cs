@@ -79,6 +79,7 @@ namespace YetAnotherPartnerMod
                 Functions.OnOnDutyStateChanged += Functions_OnOnDutyStateChanged;
 
                 Game.LogTrivial("Yet Another Partner Mod " + typeof(YetAnotherPartnerModClass).Assembly.GetName().Version.ToString() + " loaded!");
+                cop_models = new List<string>();
                 cop_models.Add("csb_cop");
                 cop_models.Add("s_f_y_cop_01");
                 cop_models.Add("s_m_m_snowcop_01");
