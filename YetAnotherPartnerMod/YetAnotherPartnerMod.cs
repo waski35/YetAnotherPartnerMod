@@ -340,14 +340,14 @@ namespace YetAnotherPartnerMod
                         }
                         if (current_partner_task == 1)
                         {
-                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 5f)
+                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f)
                             {
                                 partner_Ped.Tasks.Clear();
                                 //partner_Ped.Tasks.StandStill(2000);
                             }
-                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) > 15f)
+                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) > 5f)
                             {
-                                partner_Ped.Tasks.Clear();
+                                //partner_Ped.Tasks.Clear();
                                 partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(3f, 3f, 3f));
                             }
                         }
@@ -355,6 +355,14 @@ namespace YetAnotherPartnerMod
                     
                 }
                 
+                if (option_dev_mode == 35)
+                {
+                    if (Game.IsKeyDown(Keys.PageUp))
+                    {
+                        Game.LocalPlayer.Character.SetPositionWithSnap(new Vector3(431f, -982f, 30f));
+                    }
+                }
+
                 GameFiber.Yield();
 
             }
