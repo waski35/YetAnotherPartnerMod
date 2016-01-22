@@ -173,16 +173,17 @@ namespace YetAnotherPartnerMod
                                 option_key_partner_stop = "NumPad4";
                             }
                         }
-                        key_select = (Keys)Enum.Parse(typeof(Keys), option_key_partner_select, true);
-                        key_follow = (Keys)Enum.Parse(typeof(Keys), option_key_partner_follow, true);
-                        key_arrest = (Keys)Enum.Parse(typeof(Keys), option_key_partner_arrest, true);
-                        key_attack = (Keys)Enum.Parse(typeof(Keys), option_key_partner_attack, true);
-                        key_stop = (Keys)Enum.Parse(typeof(Keys), option_key_partner_stop, true);
+                        
 
 
                     }
 
                     file.Close();
+                    key_select = (Keys)Enum.Parse(typeof(Keys), option_key_partner_select, true);
+                    key_follow = (Keys)Enum.Parse(typeof(Keys), option_key_partner_follow, true);
+                    key_arrest = (Keys)Enum.Parse(typeof(Keys), option_key_partner_arrest, true);
+                    key_attack = (Keys)Enum.Parse(typeof(Keys), option_key_partner_attack, true);
+                    key_stop = (Keys)Enum.Parse(typeof(Keys), option_key_partner_stop, true);
                 }
 
             }
