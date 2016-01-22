@@ -251,7 +251,6 @@ namespace YetAnotherPartnerMod
                             {
                                 partner_Ped.Tasks.Clear();
                                 partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character,new Vector3(3f,3f,3f));
-                                //partner_Ped.Tasks.GoStraightToPosition(Game.LocalPlayer.Character.Position, 7f, 0f, 150f, 0);
                                 current_partner_task = 1;
                                 Game.LogTrivial(plug_ver + " : partner is following ");
                             }
@@ -336,6 +335,19 @@ namespace YetAnotherPartnerMod
                                         Game.LogTrivial(plug_ver + " : partner traveled to player ");
                                     }
                                 }
+                            }
+                        }
+                        if (current_partner_task == 1)
+                        {
+                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 5f)
+                            {
+                                partner_Ped.Tasks.Clear();
+                                partner_Ped.Tasks.StandStill(2000);
+                            }
+                            if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) > 15f)
+                            {
+                                partner_Ped.Tasks.Clear();
+                                partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(3f, 3f, 3f));
                             }
                         }
                     }
