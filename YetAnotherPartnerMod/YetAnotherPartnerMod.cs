@@ -223,6 +223,7 @@ namespace YetAnotherPartnerMod
                                         partners = new Group(Game.LocalPlayer.Character);
                                         if (partner_Ped.IsValid())
                                         {
+                                           
                                             partners.AddMember(partner_Ped);
                                             partners.Leader = Game.LocalPlayer.Character;
                                             partner_blip = partner_Ped.AttachBlip();
@@ -241,13 +242,14 @@ namespace YetAnotherPartnerMod
                         }
 
                     }
-                    else if (Game.IsKeyDown(key_follow) || (current_partner_task != 0 && (current_partner_task == 5 || current_partner_task == 1)))
+                    else if (Game.IsKeyDown(key_follow) || (current_partner_task != 0 && (current_partner_task == 5)))
                     {
                         // partner follow me
                         if (partner_Ped.IsValid())
                         {
                             if (!partner_Ped.IsDead)
                             {
+                                partner_Ped.Tasks.ClearImmediately();
                                 partner_Ped.Tasks.GoStraightToPosition(Game.LocalPlayer.Character.Position, 7f, 0f, 150f, 0);
                                 current_partner_task = 1;
                                 Game.LogTrivial(plug_ver + " : partner is following ");
@@ -261,7 +263,7 @@ namespace YetAnotherPartnerMod
                         
                         
                     }
-                    else if (Game.IsKeyDown(key_attack) || (current_partner_task !=0 && current_partner_task == 2))
+                    else if (Game.IsKeyDown(key_attack) || (current_partner_task !=0 ))
                     {
                         // partner attack
                         if (partner_Ped.IsValid())
@@ -274,7 +276,7 @@ namespace YetAnotherPartnerMod
                             }
                         }
                     }
-                    else if (Game.IsKeyDown(key_stop) || (current_partner_task != 0 && current_partner_task == 4))
+                    else if (Game.IsKeyDown(key_stop) || (current_partner_task != 0))
                     {
                         // partner stop
                         if (partner_Ped.IsValid())
