@@ -231,7 +231,7 @@ namespace YetAnotherPartnerMod
                                             partner_Ped.CanAttackFriendlies = false;
                                             partner_Ped.MakePersistent();
                                             partner_Ped.StaysInGroups = true;
-                                            partner_Ped.KeepTasks = false;
+                                            partner_Ped.KeepTasks = true;
                                             partners.DissolveDistance = 10000f;
                                             partner_Ped.VisionRange = 500f;
 
@@ -252,8 +252,8 @@ namespace YetAnotherPartnerMod
                             if (!partner_Ped.IsDead)
                             {
                                 partner_Ped.Tasks.Clear();
-                                //partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character,new Vector3(1f,1f,1f));
-                                partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
+                                partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character,new Vector3(1f,0f,0f));
+                                //partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
                                 current_partner_task = 1;
                                 Game.LogTrivial(plug_ver + " : partner is following ");
                             }
@@ -352,8 +352,8 @@ namespace YetAnotherPartnerMod
                                 else if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) >= 2f)
                                 {
                                     //partner_Ped.Tasks.Clear();
-                                    //partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 1f, 0f));
-                                    partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
+                                    partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 0f, 0f));
+                                    //partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
                                 }
                                 else if (Game.LocalPlayer.Character.IsInAnyVehicle(false))
                                 {
