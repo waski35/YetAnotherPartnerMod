@@ -239,6 +239,7 @@ namespace YetAnotherPartnerMod
                                             partner_Ped.VisionRange = 500f;
 
                                             current_partner_task = 5;
+                                            Partner_say_something("selected");
                                             Game.LogTrivial(plug_ver + " : partner selected");
                                             Game.DisplayHelp("When Your partner dies or despawns, You can allways get a new one.", false);
                                         }
@@ -252,6 +253,7 @@ namespace YetAnotherPartnerMod
                     {
                         // partner follow me
                         Partner_follow_command();
+                        Partner_say_something("follow");
                         
                     }
                     else if (Game.IsKeyDown(key_arrest))
@@ -264,12 +266,14 @@ namespace YetAnotherPartnerMod
                     {
                         // partner attack
                         Partner_attack_command();
+                        Partner_say_something("attack");
                         Game.DisplayHelp("Partner is attacking nearby enemies.");
                     }
                     else if (Game.IsKeyDown(key_stop) && (current_partner_task != 0))
                     {
                         // partner stop
                         Partner_stop_command();
+                        Partner_say_something("stop");
                     }
                     else
                     {
@@ -314,6 +318,7 @@ namespace YetAnotherPartnerMod
                                         partner_Ped.Tasks.LeaveVehicle(LeaveVehicleFlags.LeaveDoorOpen);
                                         current_partner_task = 1;
                                         player_died = false;
+                                        Partner_say_something("car_delivered");
                                         Game.LogTrivial(plug_ver + " : partner traveled to player ");
                                     }
                                 }
@@ -403,7 +408,9 @@ namespace YetAnotherPartnerMod
                 else if (Game.LocalPlayer.Character.IsShooting)
                 {
                     Partner_attack_command();
+                    Partner_say_something("attack_ambient");
                 }
+
             }
         }
         
@@ -434,6 +441,133 @@ namespace YetAnotherPartnerMod
                     Game.LogTrivial(plug_ver + " : partner stoppped ");
                     Game.DisplayHelp("Partner halted", false);
                 }
+            }
+        }
+        public static void Partner_say_something(string speech)
+        {
+            Random sp_variant_rand = new Random();
+            int sp_variant = sp_variant_rand.Next(0, 100);
+            switch (speech)
+            {
+                case "follow" :
+                    if (sp_variant >= 0 && sp_variant < 20)
+                    {
+                        partner_Ped.PlayAmbientSpeech("Cough");
+                    }
+                    else if (sp_variant >= 20 && sp_variant < 40)
+                    {
+                        partner_Ped.PlayAmbientSpeech("Lets_Play_Darts");
+                    }
+                    else if (sp_variant >= 40 && sp_variant < 60)
+                    {
+                        partner_Ped.PlayAmbientSpeech("You_Drive");
+                    }
+                    else
+                    {
+                        partner_Ped.PlayAmbientSpeech("Hurry_Up");
+                    }
+                    break;
+                case "attack":
+                case "attack_ambient":
+                    if (sp_variant >= 0 && sp_variant < 20)
+                    {
+                        partner_Ped.PlayAmbientSpeech("INTIMIDATE");
+                    }
+                    else if (sp_variant >= 20 && sp_variant < 40)
+                    {
+                        partner_Ped.PlayAmbientSpeech("COVER_ME");
+                    }
+                    else if (sp_variant >= 40 && sp_variant < 60)
+                    {
+                        partner_Ped.PlayAmbientSpeech("TAKE_COVER");
+                    }
+                    else
+                    {
+                        partner_Ped.PlayAmbientSpeech("SHIT");
+                    }
+
+                    break;
+                case "stop" :
+                    if (sp_variant >= 0 && sp_variant < 20)
+                    {
+                        partner_Ped.PlayAmbientSpeech("COUGH");
+                    }
+                    else if (sp_variant >= 20 && sp_variant < 40)
+                    {
+                        partner_Ped.PlayAmbientSpeech("Whoop");
+                    }
+                    else if (sp_variant >= 40 && sp_variant < 60)
+                    {
+                        partner_Ped.PlayAmbientSpeech("Thanks");
+                    }
+                    else
+                    {
+                        partner_Ped.PlayAmbientSpeech("COUGH");
+                    }
+                    break;
+                case "car_delivered" :
+                    if (sp_variant >= 0 && sp_variant < 20)
+                    {
+                        partner_Ped.PlayAmbientSpeech("COUGH");
+                    }
+                    else if (sp_variant >= 20 && sp_variant < 40)
+                    {
+                        partner_Ped.PlayAmbientSpeech("GENERIC_HI");
+                    }
+                    else if (sp_variant >= 40 && sp_variant < 60)
+                    {
+                        partner_Ped.PlayAmbientSpeech("GET_IN_CAR");
+                    }
+                    else
+                    {
+                        partner_Ped.PlayAmbientSpeech("MOVE_IN");
+                    }
+                    break;
+
+                case "ambient_speech_car" :
+                    if (sp_variant >= 0 && sp_variant < 20)
+                    {
+                        partner_Ped.PlayAmbientSpeech("COUGH");
+                    }
+                    else if (sp_variant >= 20 && sp_variant < 40)
+                    {
+                        partner_Ped.PlayAmbientSpeech("MOBILE_CHAT");
+                    }
+                    else if (sp_variant >= 40 && sp_variant < 60)
+                    {
+                        partner_Ped.PlayAmbientSpeech("NOTHING_TO_SEE");
+                    }
+                    else
+                    {
+                        partner_Ped.PlayAmbientSpeech("TWO_WAY_PHONE_CHAT");
+                    }
+                    break;
+                case "selected" :
+                    if (sp_variant >= 0 && sp_variant < 20)
+                    {
+                        partner_Ped.PlayAmbientSpeech("COUGH");
+                    }
+                    else if (sp_variant >= 20 && sp_variant < 40)
+                    {
+                        partner_Ped.PlayAmbientSpeech("GENERIC_YES");
+                    }
+                    else if (sp_variant >= 40 && sp_variant < 60)
+                    {
+                        partner_Ped.PlayAmbientSpeech("SAVED");
+                    }
+                    else
+                    {
+                        partner_Ped.PlayAmbientSpeech("GENERIC_HI");
+                    }
+                    break;
+                default :
+                    if (sp_variant >= 0 && sp_variant <= 100)
+                    {
+                        partner_Ped.PlayAmbientSpeech("COUGH");
+                    }
+
+                    break;
+
             }
         }
     
