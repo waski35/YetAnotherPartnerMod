@@ -397,7 +397,7 @@ namespace YetAnotherPartnerMod
                     partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 0f, 0f));
                     //partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
                 }
-                else if (Game.LocalPlayer.Character.IsInAnyVehicle(false))
+                if (Game.LocalPlayer.Character.IsInAnyVehicle(false))
                 {
                     if (!partner_Ped.IsInAnyVehicle(true))
                     {
@@ -405,7 +405,7 @@ namespace YetAnotherPartnerMod
 
                     }
                 }
-                else if (Game.LocalPlayer.Character.IsShooting)
+                if (Game.LocalPlayer.Character.IsShooting)
                 {
                     Partner_attack_command();
                     Partner_say_something("attack_ambient");
