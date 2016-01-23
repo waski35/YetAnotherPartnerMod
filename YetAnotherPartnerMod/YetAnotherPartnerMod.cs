@@ -331,6 +331,10 @@ namespace YetAnotherPartnerMod
                         }
                     if (!partner_Ped.Exists())
                     {
+                        if (partner_blip.Exists())
+                        {
+                            partner_blip.Delete();
+                        }
                         current_partner_task = 0;
                     }
                     //if (!Game.LocalPlayer.Character.IsWeaponReadyToShoot && !Game.LocalPlayer.Character.IsReloading)
@@ -379,11 +383,13 @@ namespace YetAnotherPartnerMod
                                 {
                                     partner_Ped.Tasks.FightAgainst(attacked_ped);
                                     current_partner_task = 2;
+                                   
                                     Game.LogTrivial(plug_ver + " : partner is attacking ");
                                 }
                             }
                         }
                     }
+                    follows = false;
 
 
                 }
@@ -417,6 +423,7 @@ namespace YetAnotherPartnerMod
                         {
                             partner_Ped.Tasks.LeaveVehicle(LeaveVehicleFlags.LeaveDoorOpen);
                             partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 0f, 0f));
+                            follows = true;
                         }
                     }
                     //partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
@@ -428,9 +435,18 @@ namespace YetAnotherPartnerMod
                         if (partner_Ped.DistanceTo(Game.LocalPlayer.Character.Position) < 2f)
                         {
                             partner_Ped.WarpIntoVehicle(Game.LocalPlayer.Character.CurrentVehicle, 0);
+                            follows = true;
                         }
                         //partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle, 4000, 0);
 
+                    }
+                }
+                if (Game.LocalPlayer.Character.IsInAnyVehicle(false) && partner_Ped.IsInAnyVehicle(false))
+                {
+                    if (partner_Ped.CurrentVehicle == Game.LocalPlayer.Character.CurrentVehicle)
+                    {
+                        partner_Ped.Tasks.Pause(100);
+                        follows = true;
                     }
                 }
                 if (Game.LocalPlayer.Character.IsShooting)
@@ -467,6 +483,7 @@ namespace YetAnotherPartnerMod
                     partner_Ped.Tasks.Clear();
                     //partner_Ped.Tasks.StandStill(5000);
                     follows = false;
+                    partner_Ped.Tasks.Pause(1000);
                     current_partner_task = 4;
                     Game.LogTrivial(plug_ver + " : partner stoppped ");
                     Game.DisplayHelp("Partner halted", false);
