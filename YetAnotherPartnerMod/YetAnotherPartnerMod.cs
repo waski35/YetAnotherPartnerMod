@@ -34,6 +34,7 @@ namespace YetAnotherPartnerMod
         public static Keys key_stop;
         public static Keys key_follow;
         public static List<String> cop_models;
+        public static bool follows = false;
 
         public static bool player_died = false;
         public static int current_partner_task = 0; //0-not exists, 1- follow, 2-attack, 3-arrest, 4-stop, 5-selected
@@ -393,20 +394,22 @@ namespace YetAnotherPartnerMod
         {
             if (partner_Ped.IsValid())
             {
-                if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f)
+                if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f && follows == true)
                 {
                     if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) && !partner_Ped.IsInAnyVehicle(false))
                     {
                         partner_Ped.Tasks.Pause(100);
+                        follows = false;
                     }
                     //partner_Ped.Tasks.StandStill(2000);
                 }
                 else if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) >= 2f)
                 {
                     //partner_Ped.Tasks.Clear();
-                    if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) && !partner_Ped.IsInAnyVehicle(false))
+                    if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) && !partner_Ped.IsInAnyVehicle(false) && follows == false)
                     {
                         partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 0f, 0f));
+                        follows = true;
                     }
                     else if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) && partner_Ped.IsInAnyVehicle(false))
                     {
@@ -447,6 +450,7 @@ namespace YetAnotherPartnerMod
                 {
                     partner_Ped.Tasks.Clear();
                     partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character,new Vector3(1f,0f,0f));
+                    follows = true;
                     //partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
                     current_partner_task = 1;
                     Game.LogTrivial(plug_ver + " : partner is following ");
@@ -462,6 +466,7 @@ namespace YetAnotherPartnerMod
                 {
                     partner_Ped.Tasks.Clear();
                     //partner_Ped.Tasks.StandStill(5000);
+                    follows = false;
                     current_partner_task = 4;
                     Game.LogTrivial(plug_ver + " : partner stoppped ");
                     Game.DisplayHelp("Partner halted", false);
