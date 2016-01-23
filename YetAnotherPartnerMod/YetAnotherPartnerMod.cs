@@ -388,21 +388,38 @@ namespace YetAnotherPartnerMod
             {
                 if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f)
                 {
-                    partner_Ped.Tasks.Pause(100);
+                    if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) && !partner_Ped.IsInAnyVehicle(false))
+                    {
+                        partner_Ped.Tasks.Pause(100);
+                    }
                     //partner_Ped.Tasks.StandStill(2000);
                 }
                 else if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) >= 2f)
                 {
                     //partner_Ped.Tasks.Clear();
-                    partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 0f, 0f));
+                    if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) && !partner_Ped.IsInAnyVehicle(false))
+                    {
+                        partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 0f, 0f));
+                    }
+                    else if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) && partner_Ped.IsInAnyVehicle(false))
+                    {
+                        if (!player_died)
+                        {
+                            partner_Ped.Tasks.LeaveVehicle(LeaveVehicleFlags.LeaveDoorOpen);
+                            partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 0f, 0f));
+                        }
+                    }
                     //partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
                 }
                 if (Game.LocalPlayer.Character.IsInAnyVehicle(false))
                 {
                     if (!partner_Ped.IsInAnyVehicle(false))
                     {
-                        partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle,5000, -2);
-
+                        //if (partner_Ped.DistanceTo(Game.LocalPlayer.Character.Position) < 2f)
+                        //{
+                            //partner_Ped.WarpIntoVehicle(Game.LocalPlayer.Character.CurrentVehicle, 0);
+                        //}
+                        partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle, 4000, 0);
 
                     }
                 }
