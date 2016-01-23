@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("YetAnotherPartnerMod")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("waski35")]
 [assembly: AssemblyProduct("YetAnotherPartnerMod")]
 [assembly: AssemblyCopyright("Copyright © waski35 2016")]
 [assembly: AssemblyTrademark("")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.23.0531")]
-[assembly: AssemblyFileVersion("1.1.23.0531")]
+[assembly: AssemblyVersion("1.1.23.0548")]
+[assembly: AssemblyFileVersion("1.1.23.0548")]
