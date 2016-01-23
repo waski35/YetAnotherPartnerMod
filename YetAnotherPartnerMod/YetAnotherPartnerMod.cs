@@ -401,7 +401,7 @@ namespace YetAnotherPartnerMod
                 {
                     if (!partner_Ped.IsInAnyVehicle(false))
                     {
-                        partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle,5000, 0);
+                        partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle,5000, -2);
 
 
                     }
