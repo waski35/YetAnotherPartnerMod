@@ -298,7 +298,7 @@ namespace YetAnotherPartnerMod
                                     partner_Ped.Resurrect();
                                 }
                                 partner_Ped.Tasks.Clear();
-                                partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.LastVehicle, -1);
+                                partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.LastVehicle,5000, -1);
                                 partner_Ped.Tasks.DriveToPosition(Game.LocalPlayer.Character.Position, 35f, VehicleDrivingFlags.Normal);
                                 player_died = true;
                                 Game.LogTrivial(plug_ver + " : partner travels to player");
@@ -401,7 +401,8 @@ namespace YetAnotherPartnerMod
                 {
                     if (!partner_Ped.IsInAnyVehicle(false))
                     {
-                        partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle, 0);
+                        partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle,5000, 0);
+
 
                     }
                 }
