@@ -415,11 +415,11 @@ namespace YetAnotherPartnerMod
                 {
                     if (!partner_Ped.IsInAnyVehicle(false))
                     {
-                        //if (partner_Ped.DistanceTo(Game.LocalPlayer.Character.Position) < 2f)
-                        //{
-                            //partner_Ped.WarpIntoVehicle(Game.LocalPlayer.Character.CurrentVehicle, 0);
-                        //}
-                        partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle, 4000, 0);
+                        if (partner_Ped.DistanceTo(Game.LocalPlayer.Character.Position) < 2f)
+                        {
+                            partner_Ped.WarpIntoVehicle(Game.LocalPlayer.Character.CurrentVehicle, 0);
+                        }
+                        //partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle, 4000, 0);
 
                     }
                 }
