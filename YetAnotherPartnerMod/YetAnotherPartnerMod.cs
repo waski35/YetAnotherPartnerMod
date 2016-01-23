@@ -332,22 +332,29 @@ namespace YetAnotherPartnerMod
                     {
                         current_partner_task = 0;
                     }
+                    //if (!Game.LocalPlayer.Character.IsWeaponReadyToShoot && !Game.LocalPlayer.Character.IsReloading)
+                    //{
+                        // auto holstering weapon here if player holstered his own weapon
+                    //}
                     
-                }
+                } // ped task > 0
                 
-                if (option_dev_mode == 35)
-                {
-                    
-                    if (Game.IsKeyDown(Keys.PageUp))
-                    {
-                        World.TeleportLocalPlayer(new Vector3(431f, -982f, 30f),false);
-                    }
-                    
-                }
+                
 
                 
 
             } // on duty
+
+                if (option_dev_mode == 35) // teleport cheat
+                {
+
+                    if (Game.IsKeyDown(Keys.PageUp))
+                    {
+                        World.TeleportLocalPlayer(new Vector3(431f, -982f, 30f), false);
+                    }
+
+                }
+
                 GameFiber.Yield();
             } // petla
 
