@@ -277,7 +277,7 @@ namespace YetAnotherPartnerMod
                     {
                         // partner stop
                         Partner_stop_command();
-                        Partner_say_something("stop");
+                        //Partner_say_something("stop");
                     }
                     else
                     {
