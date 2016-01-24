@@ -345,6 +345,7 @@ namespace YetAnotherPartnerMod
                             if (partner_Ped.IsDead)
                             {
                                 partner_blip.Delete();
+                                current_partner_task = 0;
                             }
                         }
                     }
