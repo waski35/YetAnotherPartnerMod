@@ -35,6 +35,7 @@ namespace YetAnotherPartnerMod
         public static Keys key_follow;
         public static List<String> cop_models;
         public static bool follows = false;
+        public static bool partner_entering_vehicle = false;
 
         public static bool player_died = false;
         public static int current_partner_task = 0; //0-not exists, 1- follow, 2-attack, 3-arrest, 4-stop, 5-selected
@@ -406,6 +407,7 @@ namespace YetAnotherPartnerMod
                     {
                         partner_Ped.Tasks.Pause(100);
                         follows = false;
+                        partner_entering_vehicle = false;
                     }
                     //partner_Ped.Tasks.StandStill(2000);
                 }
@@ -416,6 +418,7 @@ namespace YetAnotherPartnerMod
                     {
                         partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 0f, 0f));
                         follows = true;
+                        partner_entering_vehicle = false;
                     }
                     else if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) && partner_Ped.IsInAnyVehicle(false))
                     {
@@ -424,20 +427,22 @@ namespace YetAnotherPartnerMod
                             partner_Ped.Tasks.LeaveVehicle(LeaveVehicleFlags.LeaveDoorOpen);
                             partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 0f, 0f));
                             follows = true;
+                            partner_entering_vehicle = false;
                         }
                     }
                     //partner_Ped.Tasks.GoToOffsetFromEntity(Game.LocalPlayer.Character, 1f, 360f, 7f);
                 }
-                if (Game.LocalPlayer.Character.IsInAnyVehicle(false))
+                if (Game.LocalPlayer.Character.IsInAnyVehicle(false) && !partner_Ped.IsInAnyVehicle(false))
                 {
-                    if (!partner_Ped.IsInAnyVehicle(false))
+                    if (!partner_entering_vehicle)
                     {
-                        if (partner_Ped.DistanceTo(Game.LocalPlayer.Character.Position) < 2f)
-                        {
-                            partner_Ped.WarpIntoVehicle(Game.LocalPlayer.Character.CurrentVehicle, 0);
-                            follows = true;
-                        }
-                        //partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle, 4000, 0);
+                        //if (partner_Ped.DistanceTo(Game.LocalPlayer.Character.Position) < 2f)
+                        //{
+                          //  partner_Ped.WarpIntoVehicle(Game.LocalPlayer.Character.CurrentVehicle, 0);
+                          //  follows = true;
+                        //}
+                        partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle, 10000, 0);
+                        partner_entering_vehicle = true;
 
                     }
                 }
@@ -447,6 +452,7 @@ namespace YetAnotherPartnerMod
                     {
                         partner_Ped.Tasks.Pause(100);
                         follows = true;
+                        partner_entering_vehicle = false;
                     }
                 }
                 if (Game.LocalPlayer.Character.IsShooting)
@@ -481,9 +487,9 @@ namespace YetAnotherPartnerMod
                 if (!partner_Ped.IsDead)
                 {
                     partner_Ped.Tasks.Clear();
-                    //partner_Ped.Tasks.StandStill(5000);
+                    partner_Ped.Tasks.StandStill(1000);
                     follows = false;
-                    partner_Ped.Tasks.Pause(1000);
+                    //partner_Ped.Tasks.Pause(1000);
                     current_partner_task = 4;
                     Game.LogTrivial(plug_ver + " : partner stoppped ");
                     Game.DisplayHelp("Partner halted", false);
