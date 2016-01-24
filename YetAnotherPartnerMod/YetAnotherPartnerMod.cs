@@ -401,15 +401,16 @@ namespace YetAnotherPartnerMod
         {
             if (partner_Ped.IsValid())
             {
-                if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f && follows == true)
+                if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) < 2f)
                 {
                     if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) && !partner_Ped.IsInAnyVehicle(false))
                     {
-                        partner_Ped.Tasks.Pause(100);
+                        //partner_Ped.Tasks.Pause(100);
+                        partner_Ped.Tasks.StandStill(1000);
                         follows = false;
                         partner_entering_vehicle = false;
                     }
-                    //partner_Ped.Tasks.StandStill(2000);
+                    
                 }
                 else if (Game.LocalPlayer.Character.DistanceTo(partner_Ped.Position) >= 2f)
                 {
