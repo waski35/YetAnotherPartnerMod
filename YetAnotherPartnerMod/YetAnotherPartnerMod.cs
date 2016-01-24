@@ -271,7 +271,7 @@ namespace YetAnotherPartnerMod
                         Partner_say_something("attack");
                         Game.DisplayHelp("Partner is attacking nearby enemies.");
                     }
-                    else if (Game.IsKeyDown(key_stop) && (current_partner_task != 0))
+                    else if ((Game.IsKeyDown(key_stop) && (current_partner_task != 0)) || current_partner_task == 4)
                     {
                         // partner stop
                         Partner_stop_command();
@@ -337,6 +337,16 @@ namespace YetAnotherPartnerMod
                             partner_blip.Delete();
                         }
                         current_partner_task = 0;
+                    }
+                    else
+                    {
+                        if (partner_Ped.IsValid())
+                        {
+                            if (partner_Ped.IsDead)
+                            {
+                                partner_blip.Delete();
+                            }
+                        }
                     }
                     //if (!Game.LocalPlayer.Character.IsWeaponReadyToShoot && !Game.LocalPlayer.Character.IsReloading)
                     //{
