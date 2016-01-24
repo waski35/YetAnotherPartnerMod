@@ -239,6 +239,8 @@ namespace YetAnotherPartnerMod
                                             partner_Ped.KeepTasks = true;
                                             partners.DissolveDistance = 30000f;
                                             partner_Ped.VisionRange = 500f;
+                                            partner_Ped.MaxHealth = 150;
+                                            partner_Ped.Armor = 100;
 
                                             current_partner_task = 5;
                                             Partner_say_something("selected");
