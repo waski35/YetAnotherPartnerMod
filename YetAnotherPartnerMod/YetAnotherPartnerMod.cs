@@ -409,6 +409,10 @@ namespace YetAnotherPartnerMod
                     {
                         partner_Ped.Inventory.GiveNewWeapon(new WeaponAsset("WEAPON_COMBATPISTOL"), 200, true);
                     }
+                    if (!(partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PUMPSHOTGUN"))))
+                    {
+                        partner_Ped.Inventory.GiveNewWeapon(new WeaponAsset("WEAPON_PUMPSHOTGUN"), 200, true);
+                    }
                     Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(2);
                     foreach (Ped attacked_ped in attacked_peds)
                     {
@@ -690,7 +694,8 @@ namespace YetAnotherPartnerMod
                                 //if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
                                 //{
                                 //uint* part = (uint*)partner_Ped.Handle.Value;
-                                partner_Ped.Tasks.AimWeaponAt(attacked_ped, 1000);
+                                partner_Ped.Tasks.AimWeaponAt(attacked_ped, 500);
+                                partner_Ped.Tasks.FireWeaponAt(attacked_ped, 500, FiringPattern.SingleShot);
                                 
                                 
                                 CallNative_arrest((uint)partner_Ped.Handle.Value, (uint)attacked_ped.Handle.Value);
