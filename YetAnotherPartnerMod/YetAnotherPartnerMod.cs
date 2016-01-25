@@ -221,7 +221,8 @@ namespace YetAnotherPartnerMod
                                     String pos_cop_mod = possibly_partner.Model.Name;
                                     Game.LogTrivial(plug_ver + " : cop model : " + pos_cop_mod + "is selected");
                                     
-                                    if (cop_models.Contains(pos_cop_mod.ToLower()))
+                                    //if (cop_models.Contains(pos_cop_mod.ToLower()))
+                                    if (possibly_partner.RelationshipGroup.Name == "COP")
                                     {
                                         Game.LogTrivial(plug_ver + " : possibly partner is cop");
                                         partner_Ped = possibly_partner;
@@ -241,6 +242,7 @@ namespace YetAnotherPartnerMod
                                             partner_Ped.VisionRange = 500f;
                                             partner_Ped.MaxHealth = 150;
                                             partner_Ped.Armor = 100;
+                                            
 
                                             current_partner_task = 5;
                                             Partner_say_something("selected");
