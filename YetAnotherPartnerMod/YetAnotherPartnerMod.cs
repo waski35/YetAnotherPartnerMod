@@ -263,6 +263,7 @@ namespace YetAnotherPartnerMod
                     else if (Game.IsKeyDown(key_arrest))
                     {
                         // partner arrest
+                        Partner_arrest_command();
                         
                         
                     }
@@ -636,6 +637,41 @@ namespace YetAnotherPartnerMod
                     break;
 
             }
+        }
+        public static void Partner_arrest_command()
+        {
+            if (partner_Ped.IsValid())
+            {
+                if (!partner_Ped.IsDead)
+                {
+                    partner_Ped.Tasks.Clear();
+                    Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(2);
+                    foreach (Ped attacked_ped in attacked_peds)
+                    {
+                        if (attacked_ped.IsValid())
+                        {
+                            if (attacked_ped != partner_Ped && !attacked_ped.IsPlayer)
+                            {
+                                //if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
+                                //{
+                                    Rage.Native.NativeArgument[] func_args = new Rage.Native.NativeArgument[2];
+                                    func_args[0] = (uint)partner_Ped.Handle.Value;
+                                    func_args[1] = (uint)attacked_ped.Handle.Value;
+                                    Rage.Native.NativeFunction.CallByName("TASK_CHAR_ARREST_CHAR",typeof(void), func_args);
+                                
+                                    current_partner_task = 3;
+
+                                    Game.LogTrivial(plug_ver + " : partner is arresting ");
+                                //}
+                            }
+                        }
+                    }
+                    follows = false;
+
+
+                }
+            }
+
         }
     
 
