@@ -680,7 +680,7 @@ namespace YetAnotherPartnerMod
             Rage.Native.NativeArgument[] func_args = new Rage.Native.NativeArgument[2];
             func_args[0] = partner;
             func_args[1] = attacker;
-            Rage.Native.NativeFunction.CallByName("TASK_ARREST_PED", null, func_args);
+            Rage.Native.NativeFunction.CallByName("TASK_ARREST_PED", typeof(Int32), func_args);
             //Rage.Native.NativeFunction.Natives.0xF3B9A78A178572B1<void>(partner,attacker);
                                 
         }
