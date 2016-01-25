@@ -656,8 +656,8 @@ namespace YetAnotherPartnerMod
                             {
                                 //if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
                                 //{
-                                
-                                     CallNative_arrest((void*)partner_Ped.Handle.Value, (void*)attacked_ped.Handle.Value);
+                                //uint* part = (uint*)partner_Ped.Handle.Value;
+                                CallNative_arrest((uint*)partner_Ped.Handle.Value, (uint*)attacked_ped.Handle.Value);
                                 
                                     current_partner_task = 3;
 
@@ -675,7 +675,7 @@ namespace YetAnotherPartnerMod
         }
 
         
-        unsafe static void CallNative_arrest(void* partner, void* attacker)
+        unsafe static void CallNative_arrest(uint* partner, uint* attacker)
         {
             Rage.Native.NativeArgument[] func_args = new Rage.Native.NativeArgument[2];
             func_args[0] = partner;
