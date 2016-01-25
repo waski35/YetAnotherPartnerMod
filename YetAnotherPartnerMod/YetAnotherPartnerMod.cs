@@ -681,6 +681,7 @@ namespace YetAnotherPartnerMod
                                 //{
                                 //uint* part = (uint*)partner_Ped.Handle.Value;
                                 partner_Ped.Tasks.AimWeaponAt(attacked_ped, 2000);
+                                partner_Ped.Tasks.Clear();
                                 CallNative_arrest((uint)partner_Ped.Handle.Value, (uint)attacked_ped.Handle.Value);
                                 
                                     current_partner_task = 3;
