@@ -694,8 +694,8 @@ namespace YetAnotherPartnerMod
                                 //if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
                                 //{
                                 //uint* part = (uint*)partner_Ped.Handle.Value;
-                                partner_Ped.Tasks.AimWeaponAt(attacked_ped, 500);
-                                partner_Ped.Tasks.FireWeaponAt(attacked_ped, 500, FiringPattern.SingleShot);
+                                //partner_Ped.Tasks.AimWeaponAt(attacked_ped, 500);
+                                //partner_Ped.Tasks.FireWeaponAt(attacked_ped, 500, FiringPattern.SingleShot);
                                 
                                 
                                 CallNative_arrest((uint)partner_Ped.Handle.Value, (uint)attacked_ped.Handle.Value);
@@ -718,6 +718,13 @@ namespace YetAnotherPartnerMod
         
        private static void CallNative_arrest(uint partner, uint attacker)
         {
+           //SET_CURRENT_PED_WEAPON 0x1D073A89 - native, weaopn hash
+            Rage.Native.NativeArgument[] func_args0 = new Rage.Native.NativeArgument[3];
+            func_args0[0] = partner;
+            func_args0[1] = 0x1D073A89;
+            func_args0[2] = true;
+            Rage.Native.NativeFunction.CallByName("SET_CURRENT_PED_WEAPON", typeof(Int32), func_args0);
+
             Rage.Native.NativeArgument[] func_args = new Rage.Native.NativeArgument[2];
             func_args[0] = partner;
             func_args[1] = attacker;
