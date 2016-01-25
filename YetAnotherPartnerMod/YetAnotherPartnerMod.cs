@@ -248,7 +248,7 @@ namespace YetAnotherPartnerMod
                         partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_APPISTOL")) ||
                         partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PISTOL50"))))
                                             {
-                                                partner_Ped.Inventory.GiveNewWeapon(new WeaponAsset("WEAPON_COMBATPISTOL"), 200, true);
+                                                partner_Ped.Inventory.GiveNewWeapon(new WeaponAsset("WEAPON_COMBATPISTOL"), 200, false);
                                                 Game.LogTrivial(plug_ver + " : giving partner initial weapon !");
                                             }
 
@@ -413,6 +413,7 @@ namespace YetAnotherPartnerMod
                             {
                                 if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
                                 {
+                                    partner_Ped.Tasks.AimWeaponAt(attacked_ped, 1000);
                                     partner_Ped.Tasks.FightAgainst(attacked_ped);
                                     current_partner_task = 2;
                                    
@@ -679,6 +680,7 @@ namespace YetAnotherPartnerMod
                                 //if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
                                 //{
                                 //uint* part = (uint*)partner_Ped.Handle.Value;
+                                partner_Ped.Tasks.AimWeaponAt(attacked_ped, 2000);
                                 CallNative_arrest((uint)partner_Ped.Handle.Value, (uint)attacked_ped.Handle.Value);
                                 
                                     current_partner_task = 3;
