@@ -657,8 +657,8 @@ namespace YetAnotherPartnerMod
                                 //if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
                                 //{
                                     Rage.Native.NativeArgument[] func_args = new Rage.Native.NativeArgument[2];
-                                    func_args[0] = (uint)partner_Ped.Handle.Value;
-                                    func_args[1] = (uint)attacked_ped.Handle.Value;
+                                    func_args[0] = (UInt64)partner_Ped.Handle.Value;
+                                    func_args[1] = (UInt64)attacked_ped.Handle.Value;
                                     Rage.Native.NativeFunction.CallByName("TASK_CHAR_ARREST_CHAR",typeof(void), func_args);
                                 
                                     current_partner_task = 3;
