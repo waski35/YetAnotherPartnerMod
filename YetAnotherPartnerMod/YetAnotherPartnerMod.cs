@@ -222,7 +222,7 @@ namespace YetAnotherPartnerMod
                                     Game.LogTrivial(plug_ver + " : cop model : " + pos_cop_mod + "is selected");
                                     
                                     //if (cop_models.Contains(pos_cop_mod.ToLower()))
-                                    if (possibly_partner.RelationshipGroup.Name == "COP")
+                                    if (possibly_partner.RelationshipGroup.Name == "COP" || possibly_partner.RelationshipGroup.Name == "SECURITY_GUARD" || possibly_partner.RelationshipGroup.Name == "PRIVATE_SECURITY")
                                     {
                                         Game.LogTrivial(plug_ver + " : possibly partner is cop");
                                         partner_Ped = possibly_partner;
@@ -389,7 +389,7 @@ namespace YetAnotherPartnerMod
                 if (!partner_Ped.IsDead)
                 {
                     partner_Ped.Tasks.Clear();
-                    Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(3);
+                    Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(2);
                     foreach (Ped attacked_ped in attacked_peds)
                     {
                         if (attacked_ped.IsValid())
@@ -684,6 +684,10 @@ namespace YetAnotherPartnerMod
             //Rage.Native.NativeFunction.Natives.0xF3B9A78A178572B1<void>(partner,attacker);
                                 
         }
+       private static void CallNative_GetWeapon(uint partner)
+       {
+
+       }
     
 
     } // klasa
