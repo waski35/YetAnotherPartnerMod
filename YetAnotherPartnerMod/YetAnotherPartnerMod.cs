@@ -265,7 +265,7 @@ namespace YetAnotherPartnerMod
                     else if (Game.IsKeyDown(key_arrest))
                     {
                         // partner arrest
-                        //Partner_arrest_command();
+                        Partner_arrest_command();
                         
                         
                     }
@@ -640,7 +640,7 @@ namespace YetAnotherPartnerMod
 
             }
         }
-        public static void Partner_arrest_command()
+        public unsafe static void Partner_arrest_command()
         {
             if (partner_Ped.IsValid())
             {
@@ -656,10 +656,8 @@ namespace YetAnotherPartnerMod
                             {
                                 //if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
                                 //{
-                                    Rage.Native.NativeArgument[] func_args = new Rage.Native.NativeArgument[2];
-                                    func_args[0] = (uint)partner_Ped.Handle.Value;
-                                    func_args[1] = (uint)attacked_ped.Handle.Value;
-                                    Rage.Native.NativeFunction.CallByName("TASK_CHAR_ARREST_CHAR",typeof(void), func_args);
+                                
+                                     CallNative_arrest((void*)partner_Ped.Handle.Value, (void*)attacked_ped.Handle.Value);
                                 
                                     current_partner_task = 3;
 
@@ -674,6 +672,16 @@ namespace YetAnotherPartnerMod
                 }
             }
 
+        }
+
+        
+        unsafe static void CallNative_arrest(void* partner, void* attacker)
+        {
+            Rage.Native.NativeArgument[] func_args = new Rage.Native.NativeArgument[2];
+            func_args[0] = partner;
+            func_args[1] = attacker;
+            Rage.Native.NativeFunction.CallByName("TASK_CHAR_ARREST_CHAR", typeof(void), func_args);
+                                
         }
     
 
