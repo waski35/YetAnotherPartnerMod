@@ -242,7 +242,15 @@ namespace YetAnotherPartnerMod
                                             partner_Ped.VisionRange = 500f;
                                             partner_Ped.MaxHealth = 150;
                                             partner_Ped.Armor = 100;
-                                            
+
+                                            if (!(partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PISTOL")) ||
+                        partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_COMBATPISTOL")) ||
+                        partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_APPISTOL")) ||
+                        partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PISTOL50"))))
+                                            {
+                                                partner_Ped.Inventory.GiveNewWeapon(new WeaponAsset("WEAPON_COMBATPISTOL"), 200, true);
+                                                Game.LogTrivial(plug_ver + " : giving partner initial weapon !");
+                                            }
 
                                             current_partner_task = 5;
                                             Partner_say_something("selected");
