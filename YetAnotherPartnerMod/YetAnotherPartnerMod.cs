@@ -703,7 +703,14 @@ namespace YetAnotherPartnerMod
             func_args[0] = partner;
             func_args[1] = attacker;
             Rage.Native.NativeFunction.CallByName("TASK_ARREST_PED", typeof(Int32), func_args);
-            //Rage.Native.NativeFunction.Natives.0xF3B9A78A178572B1<void>(partner,attacker);
+            Rage.Native.NativeArgument[] func_args2 = new Rage.Native.NativeArgument[2];
+            func_args2[0] = attacker;
+            func_args2[1] = true;
+            Rage.Native.NativeFunction.CallByName("SET_ENABLE_HANDCUFFS", typeof(Int32), func_args2);
+            Rage.Native.NativeArgument[] func_args3 = new Rage.Native.NativeArgument[2];
+            func_args3[0] = attacker;
+            func_args3[1] = true;
+            Rage.Native.NativeFunction.CallByName("SET_ENABLE_BOUND_ANKLES", typeof(Int32), func_args3);
                                 
         }
        private static void CallNative_GetWeapon(uint partner)
