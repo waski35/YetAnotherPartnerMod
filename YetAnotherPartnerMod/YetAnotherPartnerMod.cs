@@ -251,6 +251,11 @@ namespace YetAnotherPartnerMod
                                                 partner_Ped.Inventory.GiveNewWeapon(new WeaponAsset("WEAPON_COMBATPISTOL"), 200, false);
                                                 Game.LogTrivial(plug_ver + " : giving partner initial weapon !");
                                             }
+                                            if (!(partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PUMPSHOTGUN"))))
+                                            {
+                                                partner_Ped.Inventory.GiveNewWeapon(new WeaponAsset("WEAPON_PUMPSHOTGUN"), 200, false);
+                                                Game.LogTrivial(plug_ver + " : giving partner shootgun !");
+                                            }
 
                                             current_partner_task = 5;
                                             Partner_say_something("selected");
@@ -669,6 +674,10 @@ namespace YetAnotherPartnerMod
                         partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PISTOL50"))))
                     {
                         partner_Ped.Inventory.GiveNewWeapon(new WeaponAsset("WEAPON_COMBATPISTOL"), 200, true);
+                    }
+                    if (!(partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PUMPSHOTGUN"))))
+                    {
+                        partner_Ped.Inventory.GiveNewWeapon(new WeaponAsset("WEAPON_PUMPSHOTGUN"),200,true);
                     }
                     
                     Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(2);
