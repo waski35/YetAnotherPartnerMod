@@ -389,6 +389,13 @@ namespace YetAnotherPartnerMod
                 if (!partner_Ped.IsDead)
                 {
                     partner_Ped.Tasks.Clear();
+                    if (!(partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PISTOL")) ||
+                        partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_COMBATPISTOL")) ||
+                        partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_APPISTOL")) ||
+                        partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PISTOL50"))))
+                    {
+                        partner_Ped.Inventory.GiveNewWeapon(new WeaponAsset("WEAPON_COMBATPISTOL"), 200, true);
+                    }
                     Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(2);
                     foreach (Ped attacked_ped in attacked_peds)
                     {
@@ -647,6 +654,13 @@ namespace YetAnotherPartnerMod
                 if (!partner_Ped.IsDead)
                 {
                     partner_Ped.Tasks.Clear();
+                    if (!(partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PISTOL")) ||
+                        partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_COMBATPISTOL")) ||
+                        partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_APPISTOL")) ||
+                        partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PISTOL50"))))
+                    {
+                        partner_Ped.Inventory.GiveNewWeapon(new WeaponAsset("WEAPON_COMBATPISTOL"), 200, true);
+                    }
                     Ped[] attacked_peds = Game.LocalPlayer.Character.GetNearbyPeds(2);
                     foreach (Ped attacked_ped in attacked_peds)
                     {
