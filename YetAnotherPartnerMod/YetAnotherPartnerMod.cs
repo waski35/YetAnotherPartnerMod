@@ -739,9 +739,32 @@ namespace YetAnotherPartnerMod
             Rage.Native.NativeFunction.CallByName("SET_ENABLE_BOUND_ANKLES", typeof(Int32), func_args3);
                                 
         }
-       private static void CallNative_GetWeapon(uint partner)
+       private static void CallNative_GetWeapon(uint partner, uint weapon)
        {
+           Int32 wep = 0x1D073A89; // default shootgun
+           switch (weapon)
+           {
+               case 0:
+                    wep = 0x1D073A89; // shootgun (pump shootgun)
+               break;
+               case 1:
+                wep = 0x5EF9FEC4; // combat pistol;
+               break;
+               case 2:
+               wep = 0x1B06D571; // pistol
+               break;
+               default :
+               wep = 0x1D073A89;// shootgun (pump shootgun)
+               break;
+           
 
+                
+           }
+           Rage.Native.NativeArgument[] func_args0 = new Rage.Native.NativeArgument[3];
+           func_args0[0] = partner;
+           func_args0[1] = wep;
+           func_args0[2] = true;
+           Rage.Native.NativeFunction.CallByName("SET_CURRENT_PED_WEAPON", typeof(Int32), func_args0);
        }
     
 
