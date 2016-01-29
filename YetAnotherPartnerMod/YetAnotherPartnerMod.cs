@@ -275,7 +275,7 @@ namespace YetAnotherPartnerMod
                         Partner_say_something("follow");
                         
                     }
-                    else if (Game.IsKeyDown(key_arrest))
+                    else if (Game.IsKeyDown(key_arrest) && (current_partner_task != 0))
                     {
                         // partner arrest
                         Partner_arrest_command();
