@@ -268,7 +268,7 @@ namespace YetAnotherPartnerMod
                         }
 
                     }
-                    else if (Game.IsKeyDown(key_follow) || (current_partner_task != 0 && (current_partner_task == 5)))
+                    else if ((Game.IsKeyDown(key_follow) && (current_partner_task != 0)) || (current_partner_task == 5))
                     {
                         // partner follow me
                         Partner_follow_command();
