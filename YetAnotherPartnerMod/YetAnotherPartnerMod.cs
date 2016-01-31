@@ -535,10 +535,11 @@ namespace YetAnotherPartnerMod
                     if (current_partner_task != 4)
                     {
                         Game.LogTrivial(plug_ver + " : partner stoppped ");
+                        Game.DisplayHelp("Partner halted", false);
                     }
                     current_partner_task = 4;
                     
-                    Game.DisplayHelp("Partner halted", false);
+                    
                 }
             }
         }
