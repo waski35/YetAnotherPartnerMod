@@ -532,9 +532,14 @@ namespace YetAnotherPartnerMod
                     partner_Ped.Tasks.StandStill(1000);
                     follows = false;
                     //partner_Ped.Tasks.Pause(1000);
+                    if (current_partner_task != 4)
+                    {
+                        Game.LogTrivial(plug_ver + " : partner stoppped ");
+                        Game.DisplayHelp("Partner halted", false);
+                    }
                     current_partner_task = 4;
-                    Game.LogTrivial(plug_ver + " : partner stoppped ");
-                    Game.DisplayHelp("Partner halted", false);
+                    
+                    
                 }
             }
         }
