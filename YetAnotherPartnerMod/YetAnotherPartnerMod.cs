@@ -103,7 +103,7 @@ namespace YetAnotherPartnerMod
                     on_duty = true;
 
                     Game.DisplayNotification("~b~Yet Another Partner Mod~w~ " + typeof(YetAnotherPartnerModClass).Assembly.GetName().Version.ToString() + "~g~ loaded !");
-                    Game.DisplayHelp("To get partner, come close to one of policemen and press ~b" + option_key_partner_select + " ~w.",8000);
+                    Game.DisplayHelp("To get partner, come close to one of policemen and press ~b~" + option_key_partner_select + " ~w~.",8000);
                     
                 }
             }
@@ -466,6 +466,7 @@ namespace YetAnotherPartnerMod
                     {
                         if (!player_died)
                         {
+                            CallNative_OpenDoors((uint)partner_Ped.CurrentVehicle.Handle.Value, false);
                             partner_Ped.Tasks.LeaveVehicle(LeaveVehicleFlags.LeaveDoorOpen);
                             partner_Ped.Tasks.FollowToOffsetFromEntity(Game.LocalPlayer.Character, new Vector3(1f, 0f, 0f));
                             follows = true;
@@ -483,6 +484,7 @@ namespace YetAnotherPartnerMod
                           //  partner_Ped.WarpIntoVehicle(Game.LocalPlayer.Character.CurrentVehicle, 0);
                           //  follows = true;
                         //}
+                        CallNative_OpenDoors((uint)Game.LocalPlayer.Character.CurrentVehicle.Handle.Value, false);
                         partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle, 10000, 0);
                         partner_entering_vehicle = true;
 
@@ -770,6 +772,13 @@ namespace YetAnotherPartnerMod
            func_args0[1] = wep;
            func_args0[2] = true;
            Rage.Native.NativeFunction.CallByName("SET_CURRENT_PED_WEAPON", typeof(Int32), func_args0);
+       }
+        private static void CallNative_OpenDoors(uint veh,bool door_stat)
+       {
+           Rage.Native.NativeArgument[] func_args0 = new Rage.Native.NativeArgument[2];
+           func_args0[0] = veh;
+           func_args0[1] = door_stat;
+           Rage.Native.NativeFunction.CallByName("SET_VEHICLE_DOORS_LOCKED", typeof(Int32), func_args0);
        }
     
 
