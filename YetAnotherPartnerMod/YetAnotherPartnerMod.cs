@@ -484,7 +484,7 @@ namespace YetAnotherPartnerMod
                           //  partner_Ped.WarpIntoVehicle(Game.LocalPlayer.Character.CurrentVehicle, 0);
                           //  follows = true;
                         //}
-                        CallNative_OpenDoors((uint)partner_Ped.CurrentVehicle.Handle.Value, false);
+                        CallNative_OpenDoors((uint)Game.LocalPlayer.Character.CurrentVehicle.Handle.Value, false);
                         partner_Ped.Tasks.EnterVehicle(Game.LocalPlayer.Character.CurrentVehicle, 10000, 0);
                         partner_entering_vehicle = true;
 
