@@ -103,7 +103,7 @@ namespace YetAnotherPartnerMod
                     on_duty = true;
 
                     Game.DisplayNotification("~b~Yet Another Partner Mod~w~ " + typeof(YetAnotherPartnerModClass).Assembly.GetName().Version.ToString() + "~g~ loaded !");
-                    Game.DisplayHelp("To get partner, come close to one of policemen and press ~b" + option_key_partner_select + " ~w.",8000);
+                    Game.DisplayHelp("To get partner, come close to one of policemen and press ~b~" + option_key_partner_select + " ~w~.",8000);
                     
                 }
             }
