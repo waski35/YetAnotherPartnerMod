@@ -583,19 +583,19 @@ namespace YetAnotherPartnerMod
                 case "follow" :
                     if (sp_variant >= 0 && sp_variant < 20)
                     {
-                        partner_Ped.PlayAmbientSpeech("Cough");
+                        partner_Ped.PlayAmbientSpeech("COUGH");
                     }
                     else if (sp_variant >= 20 && sp_variant < 40)
                     {
-                        partner_Ped.PlayAmbientSpeech("Lets_Play_Darts");
+                        partner_Ped.PlayAmbientSpeech("LETS_PLAY_DARTS");
                     }
                     else if (sp_variant >= 40 && sp_variant < 60)
                     {
-                        partner_Ped.PlayAmbientSpeech("You_Drive");
+                        partner_Ped.PlayAmbientSpeech("YOU_DRIVE");
                     }
                     else
                     {
-                        partner_Ped.PlayAmbientSpeech("Hurry_Up");
+                        partner_Ped.PlayAmbientSpeech("HURRY_UP");
                     }
                     break;
                 case "attack":
@@ -625,11 +625,11 @@ namespace YetAnotherPartnerMod
                     }
                     else if (sp_variant >= 20 && sp_variant < 40)
                     {
-                        partner_Ped.PlayAmbientSpeech("Whoop");
+                        partner_Ped.PlayAmbientSpeech("WHOOP");
                     }
                     else if (sp_variant >= 40 && sp_variant < 60)
                     {
-                        partner_Ped.PlayAmbientSpeech("Thanks");
+                        partner_Ped.PlayAmbientSpeech("THANKS");
                     }
                     else
                     {
