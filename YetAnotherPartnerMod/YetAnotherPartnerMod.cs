@@ -16,29 +16,30 @@ namespace YetAnotherPartnerMod
 
     public class YetAnotherPartnerModClass
     {
-        public static string plug_ver = "Yet Another Partner Mod " + typeof(YetAnotherPartnerModClass).Assembly.GetName().Version;
-        public static int option_dev_mode = 0;
-        public static GameFiber dthread;
-        public static Ped partner_Ped;
-        public static Group partners;
-        public static Blip partner_blip;
-        public static bool on_duty = false;
-        public static string option_key_partner_select = "";
-        public static string option_key_partner_arrest = "";
-        public static string option_key_partner_attack = "";
-        public static string option_key_partner_stop = "";
-        public static string option_key_partner_follow = "";
-        public static Keys key_select;
-        public static Keys key_arrest;
-        public static Keys key_attack;
-        public static Keys key_stop;
-        public static Keys key_follow;
-        public static List<String> cop_models;
-        public static bool follows = false;
-        public static bool partner_entering_vehicle = false;
+        private static string plug_ver = "Yet Another Partner Mod " + typeof(YetAnotherPartnerModClass).Assembly.GetName().Version;
+        private static int option_dev_mode = 0;
+        private static GameFiber dthread;
+        private static Ped partner_Ped;
+        private static Ped attacked_ped_global;
+        private static Group partners;
+        private static Blip partner_blip;
+        private static bool on_duty = false;
+        private static string option_key_partner_select = "";
+        private static string option_key_partner_arrest = "";
+        private static string option_key_partner_attack = "";
+        private static string option_key_partner_stop = "";
+        private static string option_key_partner_follow = "";
+        private static Keys key_select;
+        private static Keys key_arrest;
+        private static Keys key_attack;
+        private static Keys key_stop;
+        private static Keys key_follow;
+        private static List<String> cop_models;
+        private static bool follows = false;
+        private static bool partner_entering_vehicle = false;
 
-        public static bool player_died = false;
-        public static int current_partner_task = 0; //0-not exists, 1- follow, 2-attack, 3-arrest, 4-stop, 5-selected
+        private static bool player_died = false;
+        private static int current_partner_task = 0; //0-not exists, 1- follow, 2-attack, 3-arrest, 4-stop, 5-selected
 
         /// <summary>
         /// Do not rename! Attributes or inheritance based plugins will follow when the API is more in depth.
@@ -348,6 +349,32 @@ namespace YetAnotherPartnerMod
                         {
                             Partner_ambient();
                         }
+                        if (current_partner_task == 2)
+                        {
+                            if (attacked_ped_global != null)
+                            {
+                                if (attacked_ped_global.IsValid())
+                                {
+                                    if (attacked_ped_global.IsDead || attacked_ped_global.IsCuffed)
+                                    {
+                                        Partner_follow_command();
+                                    }
+                                }
+                            }
+                        }
+                        if (current_partner_task == 3)
+                        {
+                            if (attacked_ped_global != null)
+                            {
+                                if (attacked_ped_global.IsValid())
+                                {
+                                    if (attacked_ped_global.IsDead || attacked_ped_global.IsCuffed)
+                                    {
+                                        Partner_follow_command();
+                                    }
+                                }
+                            }
+                        }
                     if (!partner_Ped.Exists())
                     {
                         if (partner_blip.Exists())
@@ -401,7 +428,7 @@ namespace YetAnotherPartnerMod
             {
                 if (!partner_Ped.IsDead)
                 {
-                    partner_Ped.Tasks.Clear();
+                    
                     if (!(partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PISTOL")) ||
                         partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_COMBATPISTOL")) ||
                         partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_APPISTOL")) ||
@@ -422,8 +449,10 @@ namespace YetAnotherPartnerMod
                             {
                                 if (attacked_ped.IsInCombat || attacked_ped.IsFleeing || attacked_ped.IsInCover)
                                 {
+                                    partner_Ped.Tasks.Clear();
                                     partner_Ped.Tasks.AimWeaponAt(attacked_ped, 1000);
                                     partner_Ped.Tasks.FightAgainst(attacked_ped);
+                                    attacked_ped_global = attacked_ped;
                                     current_partner_task = 2;
                                    
                                     Game.LogTrivial(plug_ver + " : partner is attacking ");
@@ -678,7 +707,7 @@ namespace YetAnotherPartnerMod
             {
                 if (!partner_Ped.IsDead)
                 {
-                    partner_Ped.Tasks.Clear();
+                    
                     if (!(partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_PISTOL")) ||
                         partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_COMBATPISTOL")) ||
                         partner_Ped.Inventory.Weapons.Contains(new WeaponAsset("WEAPON_APPISTOL")) ||
@@ -703,8 +732,8 @@ namespace YetAnotherPartnerMod
                                 //uint* part = (uint*)partner_Ped.Handle.Value;
                                 //partner_Ped.Tasks.AimWeaponAt(attacked_ped, 500);
                                 //partner_Ped.Tasks.FireWeaponAt(attacked_ped, 500, FiringPattern.SingleShot);
-                                
-                                
+                                partner_Ped.Tasks.Clear();
+                                attacked_ped_global = attacked_ped;
                                 CallNative_arrest((uint)partner_Ped.Handle.Value, (uint)attacked_ped.Handle.Value);
                                 
                                     current_partner_task = 3;
