@@ -559,6 +559,7 @@ namespace YetAnotherPartnerMod
             {
                 if (!partner_Ped.IsDead)
                 {
+                    
                     partner_Ped.Tasks.Clear();
                     partner_Ped.Tasks.StandStill(1000);
                     follows = false;
