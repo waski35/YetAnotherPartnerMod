@@ -56,6 +56,7 @@ namespace YetAnotherPartnerMod
             public Main()
             {
                 Game.LogTrivial(plug_ver + " : Plugin loaded !");
+                if (!CheckVersionsofAssemblies()) return;
                 if (option_dev_mode == 35)
                 {
                     Game.LogTrivial(plug_ver + " : Developer mode activated !");
@@ -852,6 +853,10 @@ namespace YetAnotherPartnerMod
                     Game.DisplayNotification("YAPM : Incompatible RPH version detected, exiting!");
                     ret = false;
                 }
+            }
+            if (ret == false)
+            {
+                return false;
             }
             FileVersionInfo myFileVersionInfo2 = FileVersionInfo.GetVersionInfo("\\Plugins\\LSPD First Response.dll");
             if (myFileVersionInfo2.FileMajorPart >= 0)
