@@ -10,6 +10,7 @@ using Rage;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace YetAnotherPartnerMod
 {
@@ -55,6 +56,7 @@ namespace YetAnotherPartnerMod
             public Main()
             {
                 Game.LogTrivial(plug_ver + " : Plugin loaded !");
+                if (!CheckVersionsofAssemblies()) return;
                 if (option_dev_mode == 35)
                 {
                     Game.LogTrivial(plug_ver + " : Developer mode activated !");
@@ -810,6 +812,77 @@ namespace YetAnotherPartnerMod
            func_args0[1] = door_stat;
            Rage.Native.NativeFunction.CallByName("SET_VEHICLE_DOORS_LOCKED", typeof(Int32), func_args0);
        }
+
+        private static bool CheckVersionsofAssemblies()
+        {
+            bool ret = false;
+            // Get the file version for the notepad.
+            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo("RagePluginHook.exe");
+            if (myFileVersionInfo.FileMajorPart >= 0)
+            {
+                if (myFileVersionInfo.FileMinorPart >= 35 && myFileVersionInfo.FileMinorPart < 37)
+                {
+                    Game.LogTrivial("Found RPH version 0.35 or 0.36.");
+                    ret = true;
+                }
+                else if (myFileVersionInfo.FileMinorPart >= 33 && myFileVersionInfo.FileMinorPart < 35)
+                {
+                    Game.LogTrivial("Found RPH version 0.33 or 0.34.");
+                    Game.LogTrivial("exiting.");
+                    Game.DisplayNotification("YAPM : Incompatible RPH version detected, exiting!");
+                    ret = false;
+                }
+                else if (myFileVersionInfo.FileMinorPart < 33)
+                {
+                    Game.LogTrivial("Found incompatible version of RPH.");
+                    Game.LogTrivial("exiting.");
+                    Game.DisplayNotification("YAPM : Incompatible RPH version detected, exiting!");
+                    ret = false;
+                }
+                else if (myFileVersionInfo.FileMinorPart >= 37)
+                {
+                    Game.LogTrivial("Found non-tested version of RPH.");
+                    Game.LogTrivial("allowing to run.");
+                    Game.DisplayNotification("YAPM : Non-tested version of RPH found. Allowing to run.");
+                    ret = true;
+                }
+                else
+                {
+                    Game.LogTrivial("Found incompatible version of RPH.");
+                    Game.LogTrivial("exiting.");
+                    Game.DisplayNotification("YAPM : Incompatible RPH version detected, exiting!");
+                    ret = false;
+                }
+            }
+            if (ret == false)
+            {
+                return false;
+            }
+            FileVersionInfo myFileVersionInfo2 = FileVersionInfo.GetVersionInfo("Plugins\\LSPD First Response.dll");
+            if (myFileVersionInfo2.FileMajorPart >= 0)
+            {
+                if (myFileVersionInfo2.FileMinorPart >= 3)
+                {
+                    Game.LogTrivial("Found LSPDFR version 0.3 or better.");
+                    ret = true;
+                }
+                else if (myFileVersionInfo2.FileMinorPart >= 2 && myFileVersionInfo2.FileMinorPart < 3)
+                {
+                    Game.LogTrivial("Found LSPDFR version 0.2.");
+                    Game.LogTrivial("exiting.");
+                    Game.DisplayNotification("YAPM : Incompatible LSPDFR version detected, exiting!");
+                    ret = false;
+                }
+                else
+                {
+                    Game.LogTrivial("Found incompatible LSPDFR version, there might be compatibility issues.");
+                    Game.LogTrivial("exiting.");
+                    Game.DisplayNotification("YAPM : Incompatible LSPDFR version detected, exiting!");
+                    ret = false;
+                }
+            }
+            return ret;
+        }
     
 
     } // klasa
