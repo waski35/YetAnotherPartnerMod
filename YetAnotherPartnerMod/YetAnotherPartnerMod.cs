@@ -222,7 +222,7 @@ namespace YetAnotherPartnerMod
                                 {
                                     Game.LogTrivial(plug_ver + " : possibly partner is alive and is human");
                                     String pos_cop_mod = possibly_partner.Model.Name;
-                                    Game.LogTrivial(plug_ver + " : cop model : " + pos_cop_mod + "is selected");
+                                    Game.LogTrivial(plug_ver + " : cop model : " + pos_cop_mod + " is selected");
                                     
                                     //if (cop_models.Contains(pos_cop_mod.ToLower()))
                                     if (possibly_partner.RelationshipGroup.Name == "COP" || possibly_partner.RelationshipGroup.Name == "SECURITY_GUARD" || possibly_partner.RelationshipGroup.Name == "PRIVATE_SECURITY")
@@ -236,7 +236,8 @@ namespace YetAnotherPartnerMod
                                             partners.AddMember(partner_Ped);
                                             partners.Leader = Game.LocalPlayer.Character;
                                             partner_blip = partner_Ped.AttachBlip();
-                                            partner_blip.Color = System.Drawing.Color.Blue;
+                                            partner_blip.Color = System.Drawing.Color.LightBlue;
+                                            partner_blip.Scale = 0.75f;
                                             partner_Ped.CanAttackFriendlies = false;
                                             partner_Ped.MakePersistent();
                                             partner_Ped.StaysInGroups = true;
@@ -828,9 +829,8 @@ namespace YetAnotherPartnerMod
                 else if (myFileVersionInfo.FileMinorPart >= 33 && myFileVersionInfo.FileMinorPart < 35)
                 {
                     Game.LogTrivial("Found RPH version 0.33 or 0.34.");
-                    Game.LogTrivial("exiting.");
-                    Game.DisplayNotification("YAPM : Incompatible RPH version detected, exiting!");
-                    ret = false;
+                    
+                    ret = true;
                 }
                 else if (myFileVersionInfo.FileMinorPart < 33)
                 {
