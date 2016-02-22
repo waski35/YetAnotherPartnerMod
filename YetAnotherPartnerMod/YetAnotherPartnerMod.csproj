@@ -41,7 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LSPD First Response">
-      <HintPath>I:\DOWNLOADS - GAMES\DODATKI\gta v\LSPDFR\core\lspdfr03manual_install\Plugins\LSPD First Response.dll</HintPath>
+      <HintPath>I:\DOWNLOADS - GAMES\DODATKI\gta v\LSPDFR\core\LSPDFR031ManualInstall\plugins\LSPD First Response.dll</HintPath>
     </Reference>
     <Reference Include="RagePluginHookSDK, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
