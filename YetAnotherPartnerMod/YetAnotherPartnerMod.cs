@@ -843,7 +843,7 @@ namespace YetAnotherPartnerMod
                 {
                     Game.LogTrivial("Found non-tested version of RPH.");
                     Game.LogTrivial("allowing to run.");
-                    Game.DisplayNotification("YAPM : Non-tested version of RPH found. Allowing to run.");
+                    //Game.DisplayNotification("YAPM : Non-tested version of RPH found. Allowing to run.");
                     ret = true;
                 }
                 else

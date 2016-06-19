@@ -42,11 +42,11 @@
   <ItemGroup>
     <Reference Include="LSPD First Response, Version=0.3.38.5436, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>I:\DOWNLOADS - GAMES\DODATKI\gta v\LSPDFR\core\LSPDFR031ManualInstall\plugins\LSPD First Response.dll</HintPath>
+      <HintPath>..\..\..\..\..\DOWNLOADS - GAMES\gta v\LSPDFR\core\LSPDFR031ManualInstall\plugins\LSPD First Response.dll</HintPath>
     </Reference>
     <Reference Include="RagePluginHookSDK, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>I:\DOWNLOADS - GAMES\DODATKI\gta v\LSPDFR\ragehook\RAGEPluginHook_0_39_946_8098_ALPHA\SDK\RagePluginHookSDK.dll</HintPath>
+      <HintPath>..\..\..\..\..\DOWNLOADS - GAMES\gta v\LSPDFR\ragehook\RAGEPluginHook_0_40_952_8173_ALPHA\SDK\RagePluginHookSDK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
