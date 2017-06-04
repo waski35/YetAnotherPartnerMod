@@ -816,6 +816,7 @@ namespace YetAnotherPartnerMod
 
         private static bool CheckVersionsofAssemblies()
         {
+            /*
             bool ret = false;
             // Get the file version for the notepad.
             FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo("RagePluginHook.exe");
@@ -882,6 +883,8 @@ namespace YetAnotherPartnerMod
                 }
             }
             return ret;
+             */
+            return true;
         }
     
 
